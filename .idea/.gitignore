@@ -9,8 +9,9 @@
 .idea/**/shelf
 .idea/modules.xml
 .idea/oklahama-cleaner.iml
-.idea/inspectionProfiles/profiles_settings.xml
 .idea/vcs.xml
+vcs.xml
+.idea/inspectionProfiles
 
 # AWS User-specific
 .idea/**/aws.xml
