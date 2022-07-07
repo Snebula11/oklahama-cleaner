@@ -78,7 +78,7 @@ def challengers(bp_df):
     # new_df['biography']
     # new_df['birth_date']
     # new_df['images']
-
+    # new_df['title']
     new_df['id'] = 'n/a'
     new_df['facebook'] = 'n/a'
     new_df['Facebook (Official)'] = 'n/a'
