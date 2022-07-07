@@ -8,7 +8,7 @@ if __name__ == '__main__':
         state = input('Type the postal abbr. of the state you want: ').upper()
 
         if state == 'CA':
-            url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/metabase_query_results_1766.csv'
+            url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/all_california_candidates.csv'
             data = bp.pd.read_csv(url)
             df = bp.pd.DataFrame(data)
             break
