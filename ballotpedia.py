@@ -1,9 +1,8 @@
-import csv
 import pandas as pd
 
 
-def challengers():
-    # our current working data model
+def challengers(bp_df):
+    # columns for our current data model
     gp_header = ['Researcher', 'id', 'name', 'State', 'official biography', 'biography', 'facebook',
                  'Facebook (Official)', 'Facebook (Personal)', 'Facebook (Campaign)', 'twitter', 'Twitter (Official)',
                  'Twitter (Personal)', 'Twitter (Campaign)', 'current_party', 'current_district', 'current_chamber',
@@ -13,9 +12,7 @@ def challengers():
                  'Instagram (Personal)', 'Instagram (Campaign)', 'Campaign mailing address', 'Campaign phone',
                  'LinkedIn']
 
-    # brings in data from CA
-    data = pd.read_csv(r'metabase_query_results_1766.csv')
-    bp_df = pd.DataFrame(data)
+    # TODO: figure out which statuses we need
 
     # deletes all candidates that either withdrew, lost, or won (we don't need them anymore!)
     row_num = len(bp_df.index)
@@ -32,12 +29,11 @@ def challengers():
 
     # START TO CHANGE OVER COLUMNS #
 
+    # TODO: ask fernando if these columns are connected properly
     new_df['name'] = bp_df['Name']
     new_df['State'] = bp_df['State']
     new_df['Facebook (Personal)'] = bp_df['Personal Facebook']
     new_df['Facebook (Campaign)'] = bp_df['Campaign Facebook']
-    # new_df['twitter']
-    # new_df['Twitter (Official)']
     new_df['Twitter (Personal)'] = bp_df['Personal Twitter']
     for i in new_df.index:
         if not pd.isna(new_df['Twitter (Personal)'][i]):
@@ -78,14 +74,17 @@ def challengers():
     # EITHER N/A OR BP DOESN'T HAVE IT#
 
     # new_df['Researcher']
-    new_df['id'] = 'n/a'
     # new_df['official biography']
     # new_df['biography']
+    # new_df['birth_date']
+    # new_df['images']
+
+    new_df['id'] = 'n/a'
     new_df['facebook'] = 'n/a'
     new_df['Facebook (Official)'] = 'n/a'
-    # new_df['birth_date']
+    new_df['twitter'] = 'n/a'
+    new_df['Twitter (Official)'] = 'n/a'
     new_df['death_date'] = 'n/a'
-    # new_df['images']
     new_df['links'] = 'n/a'
     new_df['capitol_address'] = 'n/a'
     new_df['capitol_fax'] = 'n/a'
