@@ -48,7 +48,7 @@ def candidates(ctcl_df):
             new_df['Twitter (Campaign)'][i] = ' https://www.twitter.com/' + \
                                               str(new_df['Twitter (Campaign)'][i])
 
-    new_df['images'] = ctcl_df['Photo URL']
+    new_df['image'] = ctcl_df['Photo URL']
     new_df['email'] = ctcl_df['Email']
 
     new_df['current_party'] = ctcl_df['Candidate Party Registration']
