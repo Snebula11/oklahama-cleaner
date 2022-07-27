@@ -17,7 +17,7 @@ def candidates(ctcl_df):
     # get the last and middle names
     for i in new_df.index:
         # split the name into a list
-        split_name = str(new_df['Candidate Name'][i]).split()
+        split_name = str(new_df['Name'][i]).split()
         # if it's just a first and last, store them
         if len(split_name) == 2:
             new_df.loc[i, 'name_first'] = split_name[0]
