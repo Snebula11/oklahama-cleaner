@@ -8,6 +8,7 @@ def candidates(ctcl_df):
 
     # START TO CHANGE OVER COLUMNS #
     new_df['state'] = ctcl_df['State']
+    new_df['district_ocd_id'] = ctcl_df['Electoral District OCDID']
     for row in new_df.index:
         if not pd.isna(ctcl_df['Seat'][row]):
             new_df['Office'][row] = str(ctcl_df['Office Name'][row]) + ' ' + str(ctcl_df['Seat'][row]).title()
@@ -47,17 +48,28 @@ def candidates(ctcl_df):
     new_df['twitter_official'] = ctcl_df['Twitter Name (Gov)']
     for row in new_df.index:
         if not pd.isna(new_df['twitter_official'][row]):
-            new_df.loc[row, 'twitter_official'] = ' https://www.twitter.com/' + str(new_df.loc[row, 'twitter_official'])
+            new_df.loc[row, 'twitter_official'] = 'https://www.twitter.com/' + str(new_df.loc[row, 'twitter_official'])
     new_df['twitter_personal'] = ctcl_df['Twitter Name (Personal)']
     for row in new_df.index:
         if not pd.isna(new_df['twitter_personal'][row]):
-            new_df.loc[row, 'twitter_personal'] = ' https://www.twitter.com/' + str(new_df.loc[row, 'twitter_personal'])
+            new_df.loc[row, 'twitter_personal'] = 'https://www.twitter.com/' + str(new_df.loc[row, 'twitter_personal'])
     new_df['twitter_campaign'] = ctcl_df['Twitter Name (Campaign)']
     for row in new_df.index:
         if not pd.isna(new_df['twitter_campaign'][row]):
-            new_df.loc[row, 'twitter_campaign'] = ' https://www.twitter.com/' + str(new_df.loc[row, 'twitter_campaign'])
+            new_df.loc[row, 'twitter_campaign'] = 'https://www.twitter.com/' + str(new_df.loc[row, 'twitter_campaign'])
     new_df['instagram_official'] = ctcl_df['Instagram URL (Gov)']
     new_df['instagram_personal'] = ctcl_df['Instagram URL (Personal)']
     new_df['instagram_campaign'] = ctcl_df['Instagram URL (Campaign)']
+    new_df['wikipedia_id'] = ctcl_df['Wiki Word']
+    for row in new_df.index:
+        if not pd.isna(new_df['wikipedia_id'][row]):
+            new_df.loc[row, 'wikipedia_id'] = 'https://en.wikipedia.org/wiki/' + str(new_df.loc[row, 'wikipedia_id'])
+
+    for row in new_df.index:
+        print(ctcl_df['Incumbent'][row])
+        if pd.isna(ctcl_df['Incumbent'][row]):
+            print('inside')
+            for field in dh.incumbents_only:
+                new_df.loc[row, field] = 'n/a'
 
     return new_df

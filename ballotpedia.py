@@ -47,11 +47,11 @@ def convert_ballotpedia(bp_df):
     new_df['twitter_campaign'] = bp_df['Campaign Twitter']
     for row in new_df.index:
         if not pd.isna(new_df['twitter_campaign'][row]):
-            new_df.loc[row, 'twitter_campaign'] = ' https://www.twitter.com/' + str(new_df.loc[row, 'twitter_campaign'])
+            new_df.loc[row, 'twitter_campaign'] = 'https://www.twitter.com/' + str(new_df.loc[row, 'twitter_campaign'])
     new_df['twitter_personal'] = bp_df['Personal Twitter']
     for row in new_df.index:
         if not pd.isna(new_df['twitter_personal'][row]):
-            new_df.loc[row, 'twitter_personal'] = ' https://www.twitter.com/' + str(new_df.loc[row, 'twitter_personal'])
+            new_df.loc[row, 'twitter_personal'] = 'https://www.twitter.com/' + str(new_df.loc[row, 'twitter_personal'])
     new_df['instagram_campaign'] = bp_df['Campaign Instagram']
     new_df['instagram_personal'] = bp_df['Personal Instagram']
     new_df['address_campaign'] = bp_df['Campaign mailing address']

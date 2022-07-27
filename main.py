@@ -12,6 +12,8 @@ if __name__ == '__main__':
             bp_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/ca_bp_data.csv'
             bp_data = bp.pd.read_csv(bp_url)
             bp_df = bp.pd.DataFrame(bp_data)
+            # getting ctcl data
+
             # creating filepath
             output_filepath = 'data/' + state.lower() + '_output.csv'
             # output california data
