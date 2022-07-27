@@ -2,7 +2,7 @@ import pandas as pd
 import data_headers as dh
 
 
-def candidates(ctcl_df):
+def convert_ctcl(ctcl_df):
     # makes our new DataFrame, with the fields we want
     new_df = pd.DataFrame(columns=dh.mapped_data)
 

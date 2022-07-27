@@ -13,11 +13,14 @@ if __name__ == '__main__':
             bp_data = bp.pd.read_csv(bp_url)
             bp_df = bp.pd.DataFrame(bp_data)
             # getting ctcl data
-
+            ctcl_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/ca_ctcl_data.csv'
+            ctcl_data = bp.pd.read_csv(ctcl_url)
+            ctcl_df = bp.pd.DataFrame(ctcl_data)
             # creating filepath
             output_filepath = 'data/' + state.lower() + '_output.csv'
             # output california data
-            bp.convert_ballotpedia(bp_df).to_csv(output_filepath, index=False)
+            ctcl.convert_ctcl(ctcl_df).to_csv(output_filepath, index=False)
+            # bp.convert_ballotpedia(bp_df).to_csv(output_filepath, index=False)
             break
         elif state == 'OK':
             # getting ctcl data
@@ -27,7 +30,7 @@ if __name__ == '__main__':
             # creating filepath
             output_filepath = 'data/' + state.lower() + '_output.csv'
             # output oklahoma data
-            ctcl.candidates(ctcl_df).to_csv(output_filepath, index=False)
+            ctcl.convert_ctcl(ctcl_df).to_csv(output_filepath, index=False)
             break
         else:
             print("\nSorry, we couldn't find that state. Please try again using a two-letter postal code.\n")
