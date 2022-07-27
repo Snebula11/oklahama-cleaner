@@ -1,98 +1,75 @@
 import pandas as pd
+import data_headers as dh
 
 
-def challengers(bp_df):
-    # columns for our current data model
-    gp_header = ['Researcher', 'id', 'name', 'State', 'official biography', 'biography', 'facebook',
-                 'Facebook (Official)', 'Facebook (Personal)', 'Facebook (Campaign)', 'twitter', 'Twitter (Official)',
-                 'Twitter (Personal)', 'Twitter (Campaign)', 'current_party', 'current_district', 'current_chamber',
-                 'title', 'status', 'given_name', 'family_name', 'gender', 'email', 'birth_date', 'death_date', 'image',
-                 'links', 'sources', 'capitol_address', 'capitol_voice', 'capitol_fax', 'district_address',
-                 'district_voice', 'district_fax', 'youtube', 'instagram', 'Instagram (Official)',
-                 'Instagram (Personal)', 'Instagram (Campaign)', 'Campaign mailing address', 'Campaign phone',
-                 'LinkedIn']
-
-    # TODO: figure out which statuses we need
-
-    # deletes all candidates that either withdrew, lost, or won (we don't need them anymore!)
-    row_num = len(bp_df.index)
-    bad_status = ['Withdrew', 'Lost', 'Won']
-    rows_to_delete = []
-    for i in range(0, row_num):
-        if bp_df['Candidate status'][i] in bad_status:
-            rows_to_delete.append(i)
-    bp_df.drop(labels=rows_to_delete, axis=0, inplace=True)
-    bp_df.reset_index(inplace=True)
-
+def convert_ballotpedia(bp_df):
     # makes our new DataFrame, with the fields we want
-    new_df = pd.DataFrame(columns=gp_header)
+    new_df = pd.DataFrame(columns=dh.mapped_data)
 
     # START TO CHANGE OVER COLUMNS #
 
-    # TODO: ask fernando if these columns are connected properly
-    new_df['name'] = bp_df['Name']
     new_df['State'] = bp_df['State']
-    new_df['Facebook (Personal)'] = bp_df['Personal Facebook']
-    new_df['Facebook (Campaign)'] = bp_df['Campaign Facebook']
-    new_df['Twitter (Personal)'] = bp_df['Personal Twitter']
+    new_df['Ballotpedia Office ID'] = bp_df['Office ID']
+    new_df['Office'] = bp_df['Office name']
+    new_df['district'] = bp_df['District name']
+    new_df['district_ocd_id'] = bp_df['District OCDID']
+    new_df['ballotpedia_id'] = bp_df['Person ID']
+    # TODO: what should 'status' be
+    new_df['Name'] = bp_df['Name']
+    # get the last and middle names
     for i in new_df.index:
-        if not pd.isna(new_df['Twitter (Personal)'][i]):
-            new_df['Twitter (Personal)'][i] = ' https://www.twitter.com/' + \
-                                              str(new_df['Twitter (Personal)'][i])
-
-    new_df['Twitter (Campaign)'] = bp_df['Campaign Twitter']
-    for i in new_df.index:
-        if not pd.isna(new_df['Twitter (Campaign)'][i]):
-            new_df['Twitter (Campaign)'][i] = ' https://www.twitter.com/' + \
-                                              str(new_df['Twitter (Campaign)'][i])
-
-    new_df['current_party'] = bp_df['Party affiliation']
-    new_df['current_district'] = bp_df['Office name']
-    new_df['current_chamber'] = bp_df['Office name']
-    new_df['status'] = 'Candidate'
-    new_df['given_name'] = bp_df['First name']
-    new_df['family_name'] = bp_df['Last name']
+        # split the name into a list
+        split_name = str(new_df['Name'][i]).split()
+        # if it's just a first and last, store them
+        if len(split_name) == 2:
+            new_df.loc[i, 'name_first'] = split_name[0]
+            new_df.loc[i, 'name_last'] = split_name[1]
+        elif len(split_name) == 3:
+            # if there's a suffix, store that
+            if 'Jr.' in split_name or 'Sr.' in split_name:
+                new_df.loc[i, 'name_first'] = split_name[0]
+                new_df.loc[i, 'name_last'] = split_name[1]
+                new_df.loc[i, 'name_suffix'] = split_name[2]
+            # if there's not, look for a middle name
+            else:
+                new_df.loc[i, 'name_first'] = split_name[0]
+                new_df.loc[i, 'name_middle'] = split_name[1]
+                new_df.loc[i, 'name_last'] = split_name[2]
+    new_df['Ballotpedia URL'] = bp_df['Ballotpedia URL']
     new_df['gender'] = bp_df['Gender']
-    new_df['email'] = bp_df['Campaign email']
-
-    new_df['sources'] = bp_df['Campaign website']
-    for i in new_df.index:
-        if pd.isna(new_df['sources'][i]) and not pd.isna(bp_df['Personal website'][i]):
-            new_df['sources'][i] = bp_df['Personal website'][i]
-
-    new_df['youtube'] = bp_df['Campaign YouTube']
-    for i in new_df.index:
-        if pd.isna(new_df['youtube'][i]) and not pd.isna(bp_df['Personal YouTube'][i]):
-            new_df['youtube'][i] = bp_df['Personal YouTube'][i]
-
-    new_df['Instagram (Personal)'] = bp_df['Personal Instagram']
-    new_df['Instagram (Campaign)'] = bp_df['Campaign Instagram']
-    new_df['Campaign mailing address'] = bp_df['Campaign mailing address']
-    new_df['Campaign phone'] = bp_df['Campaign phone']
-    new_df['LinkedIn'] = bp_df['LinkedIn']
-
-    # EITHER N/A OR BP DOESN'T HAVE IT#
-
-    # new_df['Researcher']
-    # new_df['official biography']
-    # new_df['biography']
-    # new_df['birth_date']
-    # new_df['images']
-    # new_df['title']
-    new_df['id'] = 'n/a'
-    new_df['facebook'] = 'n/a'
-    new_df['Facebook (Official)'] = 'n/a'
-    new_df['twitter'] = 'n/a'
-    new_df['Twitter (Official)'] = 'n/a'
-    new_df['death_date'] = 'n/a'
-    new_df['links'] = 'n/a'
-    new_df['capitol_address'] = 'n/a'
-    new_df['capitol_fax'] = 'n/a'
-    new_df['capitol_voice'] = 'n/a'
-    new_df['district_address'] = 'n/a'
-    new_df['district_voice'] = 'n/a'
-    new_df['district_fax'] = 'n/a'
-    new_df['instagram'] = 'n/a'
-    new_df['Instagram (Official)'] = 'n/a'
+    new_df['party'] = bp_df['Party affiliation']
+    new_df['email_campaign'] = bp_df['Campaign email']
+    new_df['email_other'] = bp_df['Other email']
+    new_df['website_campaign'] = bp_df['Campaign website']
+    new_df['website_personal'] = bp_df['Personal website']
+    new_df['facebook_campaign'] = bp_df['Campaign Facebook']
+    new_df['facebook_personal'] = bp_df['Personal Facebook']
+    new_df['twitter_campaign'] = bp_df['Campaign Twitter']
+    for row in new_df.index:
+        if not pd.isna(new_df['twitter_campaign'][row]):
+            new_df.loc[row, 'twitter_campaign'] = ' https://www.twitter.com/' + str(new_df.loc[row, 'twitter_campaign'])
+    new_df['twitter_personal'] = bp_df['Personal Twitter']
+    for row in new_df.index:
+        if not pd.isna(new_df['twitter_personal'][row]):
+            new_df.loc[row, 'twitter_personal'] = ' https://www.twitter.com/' + str(new_df.loc[row, 'twitter_personal'])
+    new_df['instagram_campaign'] = bp_df['Campaign Instagram']
+    new_df['instagram_personal'] = bp_df['Personal Instagram']
+    new_df['address_campaign'] = bp_df['Campaign mailing address']
+    new_df['phone_campaign'] = bp_df['Campaign phone']
+    new_df['linkedin'] = bp_df['LinkedIn']
+    for row in new_df.index:
+        if bp_df['Incumbent?'][row] == 'No':
+            for field in dh.incumbents_only:
+                new_df.loc[row, field] = 'n/a'
 
     return new_df
+
+# deletes all candidates that either withdrew, lost, or won (we don't need them anymore!)
+# row_num = len(bp_df.index)
+# bad_status = ['Withdrew', 'Lost', 'Won']
+# rows_to_delete = []
+# for i in range(0, row_num):
+#     if bp_df['Candidate status'][i] in bad_status:
+#         rows_to_delete.append(i)
+# bp_df.drop(labels=rows_to_delete, axis=0, inplace=True)
+# bp_df.reset_index(inplace=True)
