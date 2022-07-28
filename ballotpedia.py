@@ -7,10 +7,9 @@ def convert_ballotpedia(bp_df):
     new_df = pd.DataFrame(columns=dh.mapped_data)
 
     # deletes all candidates that either withdrew, lost, or won (we don't need them anymore!)
-    row_num = len(bp_df.index)
     rows_to_delete = []
-    for i in range(0, row_num):
-        if bp_df['Candidate status'][i] in ['Withdrew', 'Lost', 'Won']:
+    for i in range(0, len(bp_df.index)):
+        if bp_df['Stage'][i] == 'Primary':
             rows_to_delete.append(i)
     bp_df.drop(labels=rows_to_delete, axis=0, inplace=True)
     bp_df.reset_index(inplace=True)
