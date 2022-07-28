@@ -1,10 +1,6 @@
 import ballotpedia as bp
 import ctcl
-
-def combine_ctcl_bp(cdf, bdf):
-    for row in bdf:
-        return row
-
+import unify
 
 if __name__ == '__main__':
     # input loop
@@ -24,8 +20,9 @@ if __name__ == '__main__':
             # creating filepath
             output_filepath = 'data/' + state.lower() + '_output.csv'
             # output california data
-            bp.convert_ballotpedia(bp_df).to_csv(output_filepath, index=False, encoding='utf-8')
-            # ctcl.convert_ctcl(ctcl_df).to_csv(output_filepath, index=False, encoding='utf-8')
+            converted_bp = bp.convert_ballotpedia(bp_df)
+            converted_ctcl = ctcl.convert_ctcl(ctcl_df)
+            unify.unify_bp_ctcl(converted_bp, converted_ctcl).to_csv(output_filepath, index=False, encoding='utf-8')
             break
         elif state == 'OK':
             # getting ctcl data
