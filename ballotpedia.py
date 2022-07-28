@@ -6,6 +6,15 @@ def convert_ballotpedia(bp_df):
     # makes our new DataFrame, with the fields we want
     new_df = pd.DataFrame(columns=dh.mapped_data)
 
+    # deletes all candidates that either withdrew, lost, or won (we don't need them anymore!)
+    row_num = len(bp_df.index)
+    rows_to_delete = []
+    for i in range(0, row_num):
+        if bp_df['Candidate status'][i] in ['Withdrew', 'Lost', 'Won']:
+            rows_to_delete.append(i)
+    bp_df.drop(labels=rows_to_delete, axis=0, inplace=True)
+    bp_df.reset_index(inplace=True)
+
     # START TO CHANGE OVER COLUMNS #
 
     new_df['State'] = bp_df['State']
@@ -63,13 +72,3 @@ def convert_ballotpedia(bp_df):
                 new_df.loc[row, field] = 'n/a'
 
     return new_df
-
-# deletes all candidates that either withdrew, lost, or won (we don't need them anymore!)
-# row_num = len(bp_df.index)
-# bad_status = ['Withdrew', 'Lost', 'Won']
-# rows_to_delete = []
-# for i in range(0, row_num):
-#     if bp_df['Candidate status'][i] in bad_status:
-#         rows_to_delete.append(i)
-# bp_df.drop(labels=rows_to_delete, axis=0, inplace=True)
-# bp_df.reset_index(inplace=True)

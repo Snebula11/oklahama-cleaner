@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import data_headers as dh
 
 
@@ -34,6 +35,9 @@ def convert_ctcl(ctcl_df):
                 new_df.loc[i, 'name_first'] = split_name[0]
                 new_df.loc[i, 'name_middle'] = split_name[1]
                 new_df.loc[i, 'name_last'] = split_name[2]
+        if str(new_df.loc[i, 'name_middle'])[0] == '"':
+            new_df.loc[i, 'nickname'] = new_df.loc[i, 'name_middle']
+            new_df.loc[i, 'name_middle'] = np.nan
     new_df['party'] = ctcl_df['Candidate Party Registration']
     # TODO: should ctcl's 'phone', 'mailing address', 'email' be campaign or official
     new_df['phone_campaign'] = ctcl_df['Phone']
@@ -66,9 +70,7 @@ def convert_ctcl(ctcl_df):
             new_df.loc[row, 'wikipedia_id'] = 'https://en.wikipedia.org/wiki/' + str(new_df.loc[row, 'wikipedia_id'])
 
     for row in new_df.index:
-        print(ctcl_df['Incumbent'][row])
         if pd.isna(ctcl_df['Incumbent'][row]):
-            print('inside')
             for field in dh.incumbents_only:
                 new_df.loc[row, field] = 'n/a'
 
