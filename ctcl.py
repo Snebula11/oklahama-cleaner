@@ -70,6 +70,8 @@ def convert_ctcl(ctcl_df):
 
     for row in new_df.index:
         if pd.isna(ctcl_df['Incumbent'][row]):
+            for field in dh.incumbents_only:
+                new_df.loc[row, field] = 'n/a'
             new_df.loc[row, 'status'] = 'Challenger'
         else:
             new_df.loc[row, 'status'] = 'Incumbent'

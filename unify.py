@@ -19,4 +19,7 @@ def unify_bp_ctcl(primary_df, secondary_df):
         if primary_df['status'][p_row] == 'Challenger':
             for field in dh.incumbents_only:
                 primary_df.loc[p_row, field] = 'n/a'
+        elif primary_df['status'][p_row] == 'Incumbent':
+            for field in dh.incumbents_only:
+                primary_df.loc[p_row, field] = pd.NA
     return primary_df
