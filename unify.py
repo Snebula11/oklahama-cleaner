@@ -12,8 +12,11 @@ def unify_bp_ctcl(primary_df, secondary_df):
             curr_name = str(secondary_df.loc[s_row, 'name_first']) + ' ' + str(secondary_df.loc[s_row, 'name_last'])
             # if the candidate matches, we go through each cell in the row and fill it in if it's blank
             if search_name == curr_name:
+                # we go through each column header
                 for field in dh.mapped_data:
                     if pd.isna(primary_df.loc[p_row, field]) and not pd.isna(secondary_df.loc[s_row, field]):
                         primary_df.loc[p_row, field] = secondary_df.loc[s_row, field]
-
+        if primary_df['status'][p_row] == 'Challenger':
+            for field in dh.incumbents_only:
+                primary_df.loc[p_row, field] = 'n/a'
     return primary_df

@@ -19,9 +19,10 @@ if __name__ == '__main__':
             ctcl_df = bp.pd.DataFrame(ctcl_data)
             # creating filepath
             output_filepath = 'data/' + state.lower() + '_output.csv'
-            # output california data
+            # create bp and ctcl california data
             converted_bp = bp.convert_ballotpedia(bp_df)
             converted_ctcl = ctcl.convert_ctcl(ctcl_df)
+            # unify and output the merged data
             unify.unify_bp_ctcl(converted_bp, converted_ctcl).to_csv(output_filepath, index=False, encoding='utf-8')
             break
         elif state == 'OK':

@@ -22,7 +22,6 @@ def convert_ballotpedia(bp_df):
     new_df['district'] = bp_df['District name']
     new_df['district_ocd_id'] = bp_df['District OCDID']
     new_df['ballotpedia_id'] = bp_df['Person ID']
-    # TODO: what should 'status' be
     new_df['Name'] = bp_df['Name']
     # get the last and middle names
     for i in new_df.index:
@@ -69,8 +68,6 @@ def convert_ballotpedia(bp_df):
     for row in new_df.index:
         if bp_df['Incumbent?'][row] == 'No':
             new_df.loc[row, 'status'] = 'Challenger'
-            for field in dh.incumbents_only:
-                new_df.loc[row, field] = 'n/a'
         elif bp_df['Incumbent?'][row] == 'Yes':
             new_df.loc[row, 'status'] = 'Incumbent'
 
