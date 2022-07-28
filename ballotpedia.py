@@ -66,9 +66,13 @@ def convert_ballotpedia(bp_df):
     new_df['address_campaign'] = bp_df['Campaign mailing address']
     new_df['phone_campaign'] = bp_df['Campaign phone']
     new_df['linkedin'] = bp_df['LinkedIn']
+
     for row in new_df.index:
         if bp_df['Incumbent?'][row] == 'No':
+            new_df.loc[row, 'status'] = 'Challenger'
             for field in dh.incumbents_only:
                 new_df.loc[row, field] = 'n/a'
+        elif bp_df['Incumbent?'][row] == 'Yes':
+            new_df.loc[row, 'status'] = 'Incumbent'
 
     return new_df

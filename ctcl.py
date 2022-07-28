@@ -39,7 +39,6 @@ def convert_ctcl(ctcl_df):
             new_df.loc[i, 'nickname'] = new_df.loc[i, 'name_middle']
             new_df.loc[i, 'name_middle'] = np.nan
     new_df['party'] = ctcl_df['Candidate Party Registration']
-    # TODO: should ctcl's 'phone', 'mailing address', 'email' be campaign or official
     new_df['phone_campaign'] = ctcl_df['Phone']
     new_df['address_campaign'] = ctcl_df['Mailing Address']
     new_df['website_campaign'] = ctcl_df['Website (Campaign)']
@@ -71,7 +70,10 @@ def convert_ctcl(ctcl_df):
 
     for row in new_df.index:
         if pd.isna(ctcl_df['Incumbent'][row]):
+            new_df.loc[row, 'status'] = 'Challenger'
             for field in dh.incumbents_only:
                 new_df.loc[row, field] = 'n/a'
+        else:
+            new_df.loc[row, 'status'] = 'Incumbent'
 
     return new_df

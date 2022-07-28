@@ -16,10 +16,10 @@ ballotpedia_fields = ['district_ocd_id', 'Name', 'name_first', 'name_middle', 'n
                       'state', 'district', 'gender', 'Office', 'email_other', 'email_campaign', 'website_campaign',
                       'website_personal', 'address_campaign', 'phone_campaign', 'twitter_personal', 'twitter_campaign',
                       'instagram_personal', 'instagram_campaign', 'facebook_personal', 'facebook_campaign', 'linkedin',
-                      'Ballotpedia URL', 'Ballotpedia Office ID']
+                      'Ballotpedia URL', 'status', 'Ballotpedia Office ID']
 
 non_bp_fields = ['govpackpub_id', 'govpack_id', 'fec_id', 'usio_id', 'opensecrets_id', 'openstates_id', 'committee_id',
-                 'nickname', 'name_prefix', 'status', 'ethnicity', 'race', 'education', 'occupation', 'email_official',
+                 'nickname', 'name_prefix', 'ethnicity', 'race', 'education', 'occupation', 'email_official',
                  'Bio', 'date_of_birth', 'date_of_death', 'Image', 'website_official', 'address_capitol',
                  'phone_capitol', 'fax_capitol', 'address_district', 'phone_district', 'fax_district',
                  'contact_form_url', 'date_assumed_office', 'appointed_by', 'appointed_data', 'confirmed_date',
@@ -32,10 +32,10 @@ ctcl_fields = ['state', 'Office', 'Name', 'name_first', 'name_middle', 'name_las
                'name_suffix', 'party', 'phone_campaign', 'address_campaign', 'website_campaign', 'website_personal',
                'email_campaign', 'Image', 'facebook_official', 'facebook_personal', 'facebook_campaign',
                'twitter_official', 'twitter_personal', 'twitter_campaign', 'instagram_official', 'instagram_personal',
-               'instagram_campaign', 'district_ocd_id', 'wikipedia_id']
+               'instagram_campaign', 'district_ocd_id', 'wikipedia_id', 'status']
 
 non_ctcl_fields = ['govpackpub_id', 'govpack_id', 'fec_id', 'usio_id', 'opensecrets_id',
-                   'openstates_id', 'committee_id', 'status', 'district', 'ethnicity', 'race', 'gender',
+                   'openstates_id', 'committee_id', 'district', 'ethnicity', 'race', 'gender',
                    'education', 'occupation', 'email_official', 'email_other', 'Bio', 'date_of_birth', 'date_of_death',
                    'website_official', 'address_capitol', 'phone_capitol', 'fax_capitol', 'address_district',
                    'phone_district', 'fax_district', 'contact_form_url', 'date_assumed_office', 'appointed_by',
