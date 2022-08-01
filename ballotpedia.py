@@ -16,7 +16,7 @@ def convert_ballotpedia(bp_df):
 
     # START TO CHANGE OVER COLUMNS #
 
-    new_df['State'] = bp_df['State']
+    new_df['state'] = bp_df['State']
     new_df['Ballotpedia Office ID'] = bp_df['Office ID']
     new_df['Office'] = bp_df['Office name']
     new_df['district'] = bp_df['District name']
@@ -42,6 +42,18 @@ def convert_ballotpedia(bp_df):
                 new_df.loc[i, 'name_first'] = split_name[0]
                 new_df.loc[i, 'name_middle'] = split_name[1]
                 new_df.loc[i, 'name_last'] = split_name[2]
+        elif len(split_name) == 4:
+            # if there's a suffix, store that
+            if 'Jr.' in split_name or 'Sr.' in split_name:
+                new_df.loc[i, 'name_first'] = split_name[0]
+                new_df.loc[i, 'name_middle'] = split_name[1]
+                new_df.loc[i, 'name_last'] = split_name[2]
+                new_df.loc[i, 'name_suffix'] = split_name[3]
+            # if there's not, look for a middle name
+            else:
+                new_df.loc[i, 'name_first'] = split_name[0]
+                new_df.loc[i, 'name_middle'] = split_name[1] + ' ' + split_name[2]
+                new_df.loc[i, 'name_last'] = split_name[3]
     new_df['Ballotpedia URL'] = bp_df['Ballotpedia URL']
     new_df['gender'] = bp_df['Gender']
     new_df['party'] = bp_df['Party affiliation']
@@ -68,7 +80,8 @@ def convert_ballotpedia(bp_df):
     for row in new_df.index:
         if bp_df['Incumbent?'][row] == 'No':
             for field in dh.incumbents_only:
-                new_df.loc[row, field] = 'n/a'
+                if pd.isna(new_df.loc[row, field]):
+                    new_df.loc[row, field] = 'n/a'
             new_df.loc[row, 'status'] = 'Challenger'
         elif bp_df['Incumbent?'][row] == 'Yes':
             new_df.loc[row, 'status'] = 'Incumbent'

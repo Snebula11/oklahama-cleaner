@@ -7,6 +7,8 @@ def convert_ctcl(ctcl_df):
     # makes our new DataFrame, with the fields we want
     new_df = pd.DataFrame(columns=dh.mapped_data)
 
+
+
     # START TO CHANGE OVER COLUMNS #
     new_df['state'] = ctcl_df['State']
     new_df['district_ocd_id'] = ctcl_df['Electoral District OCDID']
@@ -19,7 +21,8 @@ def convert_ctcl(ctcl_df):
     # get the last and middle names
     for i in new_df.index:
         # split the name into a list
-        split_name = str(new_df['Name'][i]).split()
+        name_to_split = str(new_df['Name'][i]).replace(',', '')
+        split_name = name_to_split.split()
         # if it's just a first and last, store them
         if len(split_name) == 2:
             new_df.loc[i, 'name_first'] = split_name[0]
@@ -35,6 +38,18 @@ def convert_ctcl(ctcl_df):
                 new_df.loc[i, 'name_first'] = split_name[0]
                 new_df.loc[i, 'name_middle'] = split_name[1]
                 new_df.loc[i, 'name_last'] = split_name[2]
+        elif len(split_name) == 4:
+            # if there's a suffix, store that
+            if 'Jr.' in split_name or 'Sr.' in split_name:
+                new_df.loc[i, 'name_first'] = split_name[0]
+                new_df.loc[i, 'name_middle'] = split_name[1]
+                new_df.loc[i, 'name_last'] = split_name[2]
+                new_df.loc[i, 'name_suffix'] = split_name[3]
+            # if there's not, look for a middle name
+            else:
+                new_df.loc[i, 'name_first'] = split_name[0]
+                new_df.loc[i, 'name_middle'] = split_name[1] + ' ' + split_name[2]
+                new_df.loc[i, 'name_last'] = split_name[3]
         if str(new_df.loc[i, 'name_middle'])[0] == '"':
             new_df.loc[i, 'nickname'] = new_df.loc[i, 'name_middle']
             new_df.loc[i, 'name_middle'] = np.nan
@@ -71,7 +86,8 @@ def convert_ctcl(ctcl_df):
     for row in new_df.index:
         if pd.isna(ctcl_df['Incumbent'][row]):
             for field in dh.incumbents_only:
-                new_df.loc[row, field] = 'n/a'
+                if pd.isna(new_df.loc[row, field]):
+                    new_df.loc[row, field] = 'n/a'
             new_df.loc[row, 'status'] = 'Challenger'
         else:
             new_df.loc[row, 'status'] = 'Incumbent'
