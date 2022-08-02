@@ -1,5 +1,6 @@
 import ballotpedia as bp
 import ctcl
+import openstates
 import unify
 
 
@@ -34,11 +35,18 @@ if __name__ == '__main__':
             ctcl_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/CA/ca_ctcl_data.csv'
             ctcl_data = bp.pd.read_csv(ctcl_url)
             ctcl_df = bp.pd.DataFrame(ctcl_data)
+            # getting open states data
+            openstates_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/CA' \
+                             '/ca_openstates_data.csv '
+            openstates_data = bp.pd.read_csv(openstates_url)
+            openstates_df = bp.pd.DataFrame(openstates_data)
+            converted_openstates = openstates.convert_openstates(openstates_df)
+            converted_openstates.to_csv('data/CA/openstates_output.csv', index=False, encoding='utf-8')
             # create bp and ctcl california data
             converted_bp = bp.convert_ballotpedia(bp_df)
             converted_ctcl = ctcl.convert_ctcl(ctcl_df)
             # unify and output the merged data
-            unify.unify_bp_ctcl(converted_bp, converted_ctcl).to_csv(output_filepath, index=False, encoding='utf-8')
+            # unify.unify_bp_ctcl(converted_bp, converted_ctcl).to_csv(output_filepath, index=False, encoding='utf-8')
             break
         elif state == 'GA':
             # getting ballotpedia data

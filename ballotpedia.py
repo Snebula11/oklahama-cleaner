@@ -33,7 +33,7 @@ def convert_ballotpedia(bp_df):
             new_df.loc[i, 'name_last'] = split_name[1]
         elif len(split_name) == 3:
             # if there's a suffix, store that
-            if 'Jr.' in split_name or 'Sr.' in split_name:
+            if 'Jr.' in split_name or 'Sr.' in split_name or 'M.D.' in split_name or 'Ph.D.' in split_name:
                 new_df.loc[i, 'name_first'] = split_name[0]
                 new_df.loc[i, 'name_last'] = split_name[1]
                 new_df.loc[i, 'name_suffix'] = split_name[2]
@@ -44,7 +44,7 @@ def convert_ballotpedia(bp_df):
                 new_df.loc[i, 'name_last'] = split_name[2]
         elif len(split_name) == 4:
             # if there's a suffix, store that
-            if 'Jr.' in split_name or 'Sr.' in split_name:
+            if 'Jr.' in split_name or 'Sr.' in split_name or 'M.D.' in split_name or 'Ph.D.' in split_name:
                 new_df.loc[i, 'name_first'] = split_name[0]
                 new_df.loc[i, 'name_middle'] = split_name[1]
                 new_df.loc[i, 'name_last'] = split_name[2]

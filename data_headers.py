@@ -28,6 +28,23 @@ non_bp_fields = ['govpackpub_id', 'govpack_id', 'fec_id', 'usio_id', 'opensecret
                  'ballotpedia_id', 'washington_post_id', 'icpsr_id', 'wikipedia_id', 'google_entity_id',
                  'propublica URL', 'youtube_official']
 
+openstates_data = ['openstates_id', 'Name', 'name_first', 'name_middle', 'name_last', 'nickname', 'name_suffix',
+                   'party', 'district', 'Office', 'gender', 'email_official', 'Bio', 'date_of_birth', 'date_of_death',
+                   'Image', 'status', 'address_capitol', 'phone_capitol', 'fax_capitol', 'address_district',
+                   'phone_district', 'fax_district', 'youtube_campaign', 'twitter_campaign', 'instagram_campaign',
+                   'facebook_campaign']
+
+non_openstates_data = ['govpackpub_id', 'govpack_id', 'fec_id', 'usio_id', 'opensecrets_id', 'district_ocd_id',
+                       'committee_id', 'name_prefix', 'state', 'ethnicity', 'race', 'education', 'occupation',
+                       'email_other', 'email_campaign', 'website_campaign', 'website_official', 'website_personal',
+                       'contact_form_url', 'address_campaign', 'phone_campaign', 'date_assumed_office', 'appointed_by',
+                       'appointed_data', 'confirmed_date', 'term_end_data', 'congress_year', 'twitter_official',
+                       'twitter_personal', 'youtube_official', 'youtube_personal', 'instagram_official',
+                       'instagram_personal', 'facebook_official', 'facebook_personal', 'linkedin', 'rumble', 'gab',
+                       'RSS', 'thomas ID', 'lis_id', 'cspan_id', 'govtrack_id', 'votesmart_id', 'ballotpedia_id',
+                       'washington_post_id', 'icpsr_id', 'wikipedia_id', 'google_entity_id', 'Ballotpedia URL',
+                       'propublica URL', 'Ballotpedia Office ID']
+
 ctcl_fields = ['state', 'Office', 'Name', 'name_first', 'name_middle', 'name_last', 'nickname', 'name_prefix',
                'name_suffix', 'party', 'phone_campaign', 'address_campaign', 'website_campaign', 'website_personal',
                'email_campaign', 'Image', 'facebook_official', 'facebook_personal', 'facebook_campaign',
@@ -49,5 +66,3 @@ incumbents_only = ['email_official', 'website_official', 'address_capitol', 'pho
                    'address_district', 'phone_district', 'fax_district', 'date_assumed_office', 'appointed_by',
                    'appointed_data', 'confirmed_date', 'term_end_data', 'congress_year', 'twitter_official',
                    'instagram_official', 'facebook_official']
-
-match = False
