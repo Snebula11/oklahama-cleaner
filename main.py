@@ -11,11 +11,11 @@ if __name__ == '__main__':
 
         if state == 'CA':
             # getting ballotpedia data
-            bp_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/ca_bp_data.csv'
+            bp_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/CA/ca_bp_data.csv'
             bp_data = bp.pd.read_csv(bp_url)
             bp_df = bp.pd.DataFrame(bp_data)
             # getting ctcl data
-            ctcl_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/ca_ctcl_data.csv'
+            ctcl_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/CA/ca_ctcl_data.csv'
             ctcl_data = bp.pd.read_csv(ctcl_url)
             ctcl_df = bp.pd.DataFrame(ctcl_data)
             # create bp and ctcl california data
@@ -26,7 +26,7 @@ if __name__ == '__main__':
             break
         elif state == 'OK':
             # getting ctcl data
-            ctcl_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/ok_ctcl_data.csv'
+            ctcl_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/OK/ok_ctcl_data.csv'
             ctcl_data = ctcl.pd.read_csv(ctcl_url)
             ctcl_df = ctcl.pd.DataFrame(ctcl_data)
             # output oklahoma data

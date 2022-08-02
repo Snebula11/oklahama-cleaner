@@ -6,11 +6,11 @@ mapped_data = ['govpackpub_id', 'govpack_id', 'fec_id', 'usio_id', 'opensecrets_
                'address_capitol', 'phone_capitol', 'fax_capitol', 'address_district', 'phone_district', 'fax_district',
                'contact_form_url', 'address_campaign', 'phone_campaign', 'date_assumed_office', 'appointed_by',
                'appointed_data', 'confirmed_date', 'term_end_data', 'congress_year', 'twitter_official',
-               'twitter_personal', 'twitter_campaign', 'instagram_official', 'instagram_personal', 'instagram_campaign',
-               'facebook_official', 'facebook_personal', 'facebook_campaign', 'linkedin', 'rumble', 'gab', 'RSS',
-               'thomas ID', 'lis_id', 'cspan_id', 'govtrack_id', 'votesmart_id', 'ballotpedia_id', 'washington_post_id',
-               'icpsr_id', 'wikipedia_id', 'google_entity_id', 'Ballotpedia URL', 'propublica URL',
-               'Ballotpedia Office ID', 'youtube_official', 'youtube_personal', 'youtube_campaign']
+               'twitter_personal', 'twitter_campaign', 'youtube_official', 'youtube_personal', 'youtube_campaign',
+               'instagram_official', 'instagram_personal', 'instagram_campaign', 'facebook_official',
+               'facebook_personal', 'facebook_campaign', 'linkedin', 'rumble', 'gab', 'RSS', 'thomas ID', 'lis_id',
+               'cspan_id', 'govtrack_id', 'votesmart_id', 'ballotpedia_id', 'washington_post_id', 'icpsr_id',
+               'wikipedia_id', 'google_entity_id', 'Ballotpedia URL', 'propublica URL', 'Ballotpedia Office ID']
 
 ballotpedia_fields = ['district_ocd_id', 'Name', 'name_first', 'name_middle', 'name_last', 'name_suffix', 'party',
                       'state', 'district', 'gender', 'Office', 'email_other', 'email_campaign', 'website_campaign',
