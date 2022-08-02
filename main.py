@@ -3,126 +3,65 @@ import ctcl
 import openstates
 import unify
 
+import urllib.error
 
 if __name__ == '__main__':
+    available_states = ['AZ', 'CA', 'GA', 'MA', 'MD', 'MS', 'NY', 'OK']
+
     # input loop
     while True:
         # take user input
-        state = input('Type the postal abbr. of the state you want: ').upper()
-        output_filepath = 'data/' + state.upper() + '/' + state.lower() + '_output.csv'
+        bp_present = False
+        ctcl_present = False
+        openstates_present = False
 
-        if state == 'AZ':
-            # getting ballotpedia data
-            bp_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/AZ/az_bp_data.csv'
-            bp_data = bp.pd.read_csv(bp_url)
-            bp_df = bp.pd.DataFrame(bp_data)
-            # getting ctcl data
-            ctcl_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/AZ/az_ctcl_data.csv'
-            ctcl_data = bp.pd.read_csv(ctcl_url)
-            ctcl_df = bp.pd.DataFrame(ctcl_data)
-            # create bp and ctcl california data
-            converted_bp = bp.convert_ballotpedia(bp_df)
-            converted_ctcl = ctcl.convert_ctcl(ctcl_df)
-            # unify and output the merged data
+        state = input('Type the postal abbr. of the state you want: ').upper()
+
+        if state in available_states:
+            # our output filepath
+            output_filepath = 'data/' + state.upper() + '/' + state.lower() + '_output.csv'
+
+            # our bp input
+            bp_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/' + state.upper() + '/' \
+                     + state.lower() + '_bp_data.csv'
+            try:
+                bp_data = bp.pd.read_csv(bp_url)
+            except urllib.error.HTTPError:
+                break
+            else:
+                bp_df = bp.pd.DataFrame(bp_data)
+                converted_bp = bp.convert_ballotpedia(bp_df)
+                bp_present = True
+
+            # our ctcl input
+            ctcl_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/' + state.upper() + '/' \
+                       + state.lower() + '_ctcl_data.csv'
+            try:
+                ctcl_data = bp.pd.read_csv(ctcl_url)
+            except urllib.error.HTTPError:
+                break
+            else:
+                ctcl_df = bp.pd.DataFrame(ctcl_data)
+                converted_ctcl = ctcl.convert_ctcl(ctcl_df)
+                ctcl_present = True
+
+            # our openstates input
+            openstates_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/' + state.upper() \
+                             + '/' + state.lower() + '_openstates_data.csv'
+            try:
+                openstates_data = bp.pd.read_csv(openstates_url)
+            except urllib.error.HTTPError:
+                break
+            else:
+                openstates_df = bp.pd.DataFrame(openstates_data)
+                converted_openstates = openstates.convert_openstates(openstates_df)
+                openstates_present = True
+
+            # output unified set
             unify.unify_bp_ctcl(converted_bp, converted_ctcl).to_csv(output_filepath, index=False, encoding='utf-8')
+            print(f'BP is {bp_present}; CTCL is {ctcl_present}; OS is {openstates_present}')
+
             break
-        elif state == 'CA':
-            # getting ballotpedia data
-            bp_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/CA/ca_bp_data.csv'
-            bp_data = bp.pd.read_csv(bp_url)
-            bp_df = bp.pd.DataFrame(bp_data)
-            # getting ctcl data
-            ctcl_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/CA/ca_ctcl_data.csv'
-            ctcl_data = bp.pd.read_csv(ctcl_url)
-            ctcl_df = bp.pd.DataFrame(ctcl_data)
-            # getting open states data
-            openstates_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/CA' \
-                             '/ca_openstates_data.csv '
-            openstates_data = bp.pd.read_csv(openstates_url)
-            openstates_df = bp.pd.DataFrame(openstates_data)
-            converted_openstates = openstates.convert_openstates(openstates_df)
-            converted_openstates.to_csv('data/CA/openstates_output.csv', index=False, encoding='utf-8')
-            # create bp and ctcl california data
-            converted_bp = bp.convert_ballotpedia(bp_df)
-            converted_ctcl = ctcl.convert_ctcl(ctcl_df)
-            # unify and output the merged data
-            # unify.unify_bp_ctcl(converted_bp, converted_ctcl).to_csv(output_filepath, index=False, encoding='utf-8')
-            break
-        elif state == 'GA':
-            # getting ballotpedia data
-            bp_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/GA/ga_bp_data.csv'
-            bp_data = bp.pd.read_csv(bp_url)
-            bp_df = bp.pd.DataFrame(bp_data)
-            # getting ctcl data
-            ctcl_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/GA/ga_ctcl_data.csv'
-            ctcl_data = bp.pd.read_csv(ctcl_url)
-            ctcl_df = bp.pd.DataFrame(ctcl_data)
-            # create bp and ctcl california data
-            converted_bp = bp.convert_ballotpedia(bp_df)
-            converted_ctcl = ctcl.convert_ctcl(ctcl_df)
-            # unify and output the merged data
-            unify.unify_bp_ctcl(converted_bp, converted_ctcl).to_csv(output_filepath, index=False, encoding='utf-8')
-            break
-        elif state == 'MA':
-            # getting ballotpedia data
-            bp_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/MA/ma_bp_data.csv'
-            bp_data = bp.pd.read_csv(bp_url)
-            bp_df = bp.pd.DataFrame(bp_data)
-            # getting ctcl data
-            ctcl_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/MA/ma_ctcl_data.csv'
-            ctcl_data = bp.pd.read_csv(ctcl_url)
-            ctcl_df = bp.pd.DataFrame(ctcl_data)
-            # create bp and ctcl california data
-            converted_bp = bp.convert_ballotpedia(bp_df)
-            converted_ctcl = ctcl.convert_ctcl(ctcl_df)
-            # unify and output the merged data
-            unify.unify_bp_ctcl(converted_bp, converted_ctcl).to_csv(output_filepath, index=False, encoding='utf-8')
-            break
-        elif state == 'MD':
-            # getting ballotpedia data
-            bp_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/MD/md_bp_data.csv'
-            bp_data = bp.pd.read_csv(bp_url)
-            bp_df = bp.pd.DataFrame(bp_data)
-            # getting ctcl data
-            ctcl_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/MD/md_ctcl_data.csv'
-            ctcl_data = bp.pd.read_csv(ctcl_url)
-            ctcl_df = bp.pd.DataFrame(ctcl_data)
-            # create bp and ctcl california data
-            converted_bp = bp.convert_ballotpedia(bp_df)
-            converted_ctcl = ctcl.convert_ctcl(ctcl_df)
-            # unify and output the merged data
-            unify.unify_bp_ctcl(converted_bp, converted_ctcl).to_csv(output_filepath, index=False, encoding='utf-8')
-            break
-        elif state == 'MS':
-            # getting ballotpedia data
-            bp_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/MS/ms_bp_data.csv'
-            bp_data = bp.pd.read_csv(bp_url)
-            bp_df = bp.pd.DataFrame(bp_data)
-            # getting ctcl data
-            ctcl_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/MS/ms_ctcl_data.csv'
-            ctcl_data = bp.pd.read_csv(ctcl_url)
-            ctcl_df = bp.pd.DataFrame(ctcl_data)
-            # create bp and ctcl california data
-            converted_bp = bp.convert_ballotpedia(bp_df)
-            converted_ctcl = ctcl.convert_ctcl(ctcl_df)
-            # unify and output the merged data
-            unify.unify_bp_ctcl(converted_bp, converted_ctcl).to_csv(output_filepath, index=False, encoding='utf-8')
-            break
-        elif state == 'NY':
-            # getting ctcl data
-            ctcl_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/NY/ny_ctcl_data.csv'
-            ctcl_data = ctcl.pd.read_csv(ctcl_url)
-            ctcl_df = ctcl.pd.DataFrame(ctcl_data)
-            # output oklahoma data
-            ctcl.convert_ctcl(ctcl_df).to_csv(output_filepath, index=False)
-            break
-        elif state == 'OK':
-            # getting ctcl data
-            ctcl_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/OK/ok_ctcl_data.csv'
-            ctcl_data = ctcl.pd.read_csv(ctcl_url)
-            ctcl_df = ctcl.pd.DataFrame(ctcl_data)
-            # output oklahoma data
-            ctcl.convert_ctcl(ctcl_df).to_csv(output_filepath, index=False)
-            break
+
         else:
-            print("\nSorry, we couldn't find that state. Please try again using a two-letter postal code.\n")
+            print("Sorry, we don't have that state available! Maybe we haven't added it, maybe a typo. Try again.")
