@@ -2,6 +2,7 @@ import ballotpedia as bp
 import ctcl
 import unify
 
+
 if __name__ == '__main__':
     # input loop
     while True:
