@@ -10,13 +10,13 @@ mapped_data = ['govpackpub_id', 'govpack_id', 'fec_id', 'usio_id', 'opensecrets_
                'facebook_official', 'facebook_personal', 'facebook_campaign', 'linkedin', 'rumble', 'gab', 'RSS',
                'thomas ID', 'lis_id', 'cspan_id', 'govtrack_id', 'votesmart_id', 'ballotpedia_id', 'washington_post_id',
                'icpsr_id', 'wikipedia_id', 'google_entity_id', 'Ballotpedia URL', 'propublica URL',
-               'Ballotpedia Office ID']
+               'Ballotpedia Office ID', 'youtube_official', 'youtube_personal', 'youtube_campaign']
 
 ballotpedia_fields = ['district_ocd_id', 'Name', 'name_first', 'name_middle', 'name_last', 'name_suffix', 'party',
                       'state', 'district', 'gender', 'Office', 'email_other', 'email_campaign', 'website_campaign',
                       'website_personal', 'address_campaign', 'phone_campaign', 'twitter_personal', 'twitter_campaign',
                       'instagram_personal', 'instagram_campaign', 'facebook_personal', 'facebook_campaign', 'linkedin',
-                      'Ballotpedia URL', 'status', 'Ballotpedia Office ID']
+                      'Ballotpedia URL', 'status', 'Ballotpedia Office ID', 'youtube_personal', 'youtube_campaign']
 
 non_bp_fields = ['govpackpub_id', 'govpack_id', 'fec_id', 'usio_id', 'opensecrets_id', 'openstates_id', 'committee_id',
                  'nickname', 'name_prefix', 'ethnicity', 'race', 'education', 'occupation', 'email_official',
@@ -26,13 +26,14 @@ non_bp_fields = ['govpackpub_id', 'govpack_id', 'fec_id', 'usio_id', 'opensecret
                  'term_end_data', 'congress_year', 'twitter_official', 'instagram_official', 'facebook_official',
                  'rumble', 'gab', 'RSS', 'thomas ID', 'lis_id', 'cspan_id', 'govtrack_id', 'votesmart_id',
                  'ballotpedia_id', 'washington_post_id', 'icpsr_id', 'wikipedia_id', 'google_entity_id',
-                 'propublica URL']
+                 'propublica URL', 'youtube_official']
 
 ctcl_fields = ['state', 'Office', 'Name', 'name_first', 'name_middle', 'name_last', 'nickname', 'name_prefix',
                'name_suffix', 'party', 'phone_campaign', 'address_campaign', 'website_campaign', 'website_personal',
                'email_campaign', 'Image', 'facebook_official', 'facebook_personal', 'facebook_campaign',
                'twitter_official', 'twitter_personal', 'twitter_campaign', 'instagram_official', 'instagram_personal',
-               'instagram_campaign', 'district_ocd_id', 'wikipedia_id', 'status']
+               'instagram_campaign', 'district_ocd_id', 'wikipedia_id', 'status', 'youtube_official',
+               'youtube_personal', 'youtube_campaign']
 
 non_ctcl_fields = ['govpackpub_id', 'govpack_id', 'fec_id', 'usio_id', 'opensecrets_id',
                    'openstates_id', 'committee_id', 'district', 'ethnicity', 'race', 'gender',

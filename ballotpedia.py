@@ -73,6 +73,8 @@ def convert_ballotpedia(bp_df):
             new_df.loc[row, 'twitter_personal'] = 'https://www.twitter.com/' + str(new_df.loc[row, 'twitter_personal'])
     new_df['instagram_campaign'] = bp_df['Campaign Instagram']
     new_df['instagram_personal'] = bp_df['Personal Instagram']
+    new_df['youtube_campaign'] = bp_df['Campaign YouTube']
+    new_df['youtube_personal'] = bp_df['Personal YouTube']
     new_df['address_campaign'] = bp_df['Campaign mailing address']
     new_df['phone_campaign'] = bp_df['Campaign phone']
     new_df['linkedin'] = bp_df['LinkedIn']

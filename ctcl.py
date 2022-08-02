@@ -7,8 +7,6 @@ def convert_ctcl(ctcl_df):
     # makes our new DataFrame, with the fields we want
     new_df = pd.DataFrame(columns=dh.mapped_data)
 
-
-
     # START TO CHANGE OVER COLUMNS #
     new_df['state'] = ctcl_df['State']
     new_df['district_ocd_id'] = ctcl_df['Electoral District OCDID']
@@ -78,6 +76,9 @@ def convert_ctcl(ctcl_df):
     new_df['instagram_official'] = ctcl_df['Instagram URL (Gov)']
     new_df['instagram_personal'] = ctcl_df['Instagram URL (Personal)']
     new_df['instagram_campaign'] = ctcl_df['Instagram URL (Campaign)']
+    new_df['youtube_campaign'] = ctcl_df['Youtube (Campaign)']
+    new_df['youtube_personal'] = ctcl_df['Youtube (Personal)']
+    new_df['youtube_official'] = ctcl_df['Youtube (Gov)']
     new_df['wikipedia_id'] = ctcl_df['Wiki Word']
     for row in new_df.index:
         if not pd.isna(new_df['wikipedia_id'][row]):
