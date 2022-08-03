@@ -1,5 +1,6 @@
 import data_headers as dh
 import pandas as pd
+import utilities as u
 
 # global variable to track which secondary+ rows match primary
 match = False
@@ -46,14 +47,11 @@ def unify_bp_ctcl(primary_df, secondary_df, third_df=None):
     added_rows_df = secondary_df.drop(labels=do_not_add, axis=0, inplace=False)
     added_rows_df.reset_index(inplace=True, drop=True)
     output_df = pd.concat([primary_df, added_rows_df], ignore_index=True)
-    output_df = output_df.reset_index()
+    output_df = output_df.reset_index(drop=True)
 
     # reset globals
     match = False
     do_not_add = []
-
-    # with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
-    #     print(output_df)
 
     # do the same with our third
     if third_df is not None:
@@ -85,6 +83,6 @@ def unify_bp_ctcl(primary_df, secondary_df, third_df=None):
         added_rows_df = third_df.drop(labels=do_not_add, axis=0, inplace=False)
         added_rows_df.reset_index(inplace=True, drop=True)
         output_df = pd.concat([output_df, added_rows_df], ignore_index=True)
-        output_df.reset_index()
+        output_df = output_df.reset_index(drop=True)
 
     return output_df

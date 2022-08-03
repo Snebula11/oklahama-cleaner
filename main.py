@@ -23,6 +23,7 @@ if __name__ == '__main__':
             try:
                 bp_data = bp.pd.read_csv(bp_url)
             except urllib.error.HTTPError:
+                print('No BP data available')
                 pass
             else:
                 bp_df = bp.pd.DataFrame(bp_data)
@@ -34,6 +35,7 @@ if __name__ == '__main__':
             try:
                 ctcl_data = bp.pd.read_csv(ctcl_url)
             except urllib.error.HTTPError:
+                print('No CTCL data available')
                 pass
             else:
                 ctcl_df = bp.pd.DataFrame(ctcl_data)
@@ -45,6 +47,7 @@ if __name__ == '__main__':
             try:
                 openstates_data = bp.pd.read_csv(openstates_url)
             except urllib.error.HTTPError:
+                print('No Open States data available')
                 pass
             else:
                 openstates_df = bp.pd.DataFrame(openstates_data)
@@ -53,15 +56,17 @@ if __name__ == '__main__':
             # OUTPUT MERGED DATASET
             # check if we have all 3
             try:
-                # noinspection PyUnboundLocalVariable
                 unified = unify.unify_bp_ctcl(converted_bp, converted_ctcl, third_df=converted_openstates)
             # if we do not
             except NameError:
+                print(f'unifying datasets for {state}')
                 unified = unify.unify_bp_ctcl(converted_ctcl, converted_openstates)
                 unified.to_csv(output_filepath, index=False, encoding='utf-8')
+                # pass
                 break
             # if we do have all 3
             else:
+                print(f'unifying datasets for {state}')
                 unified.to_csv(output_filepath, index=False, encoding='utf-8')
                 break
         else:
