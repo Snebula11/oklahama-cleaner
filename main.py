@@ -57,16 +57,19 @@ if __name__ == '__main__':
                 converted_openstates = openstates.convert_openstates(openstates_df)
 
             # PROPUBLICA
-            propublica_df = propublica.convert_propublica(state)
+            converted_propublica = propublica.convert_propublica(state)
 
             # OUTPUT MERGED DATASET
             # check if we have all 3
             try:
-                unified = unify.unify_bp_ctcl(converted_bp, converted_ctcl, third_df=converted_openstates)
+                unified = unify.unify_bp_ctcl(converted_bp,
+                                              converted_ctcl,
+                                              third_df=converted_openstates,
+                                              fourth_df=converted_propublica)
             # if we do not
             except NameError:
                 print(f'unifying datasets for {state}')
-                unified = unify.unify_bp_ctcl(converted_ctcl, converted_openstates)
+                unified = unify.unify_bp_ctcl(converted_ctcl, converted_openstates, third_df=converted_propublica)
                 unified.to_csv(output_filepath, index=False, encoding='utf-8')
                 # pass
                 break
