@@ -45,13 +45,14 @@ if __name__ == '__main__':
                 converted_ctcl = ctcl.convert_ctcl(ctcl_df)
 
             # OPENSTATES CONVERSION
-            openstates_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/' + state.upper() \
-                             + '/' + state.lower() + '_openstates_data.csv'
+            openstates_url = 'https://data.openstates.org/people/current/' + state.lower() + '.csv'
+            # openstates_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/' + state.upper() \
+            #                  + '/' + state.lower() + '_openstates_data.csv'
             try:
                 openstates_data = bp.pd.read_csv(openstates_url)
             except urllib.error.HTTPError:
                 print('No Open States data available')
-                pass
+                break
             else:
                 openstates_df = bp.pd.DataFrame(openstates_data)
                 converted_openstates = openstates.convert_openstates(openstates_df)
