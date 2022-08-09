@@ -62,6 +62,24 @@ non_ctcl_fields = ['govpackpub_id', 'govpack_id', 'fec_id', 'usio_id', 'opensecr
                    'washington_post_id', 'icpsr_id', 'google_entity_id', 'Ballotpedia URL',
                    'propublica URL', 'Ballotpedia Office ID']
 
+propublica_fields = ['Name', 'name_first', 'name_middle', 'name_last', 'name_suffix', 'date_of_birth', 'propublica URL',
+                     'gender', 'youtube_official', 'twitter_official', 'facebook_official', 'cspan_id', 'govtrack_id',
+                     'votesmart_id', 'icpsr_id', 'google_entity_id', 'fec_id', 'RSS', 'website_official', 'status',
+                     'district_ocd_id', 'address_capitol', 'phone_capitol', 'fax_capitol', 'state', 'party', 'district',
+                     'Office', 'lis_id']
+
+non_propublica_fields = ['govpackpub_id', 'govpack_id', 'usio_id', 'opensecrets_id', 'openstates_id',
+                         'committee_id', 'nickname', 'name_prefix', 'ethnicity',
+                         'race', 'education', 'occupation', 'email_official', 'email_other', 'email_campaign',
+                         'Bio', 'date_of_death', 'Image', 'website_campaign', 'website_personal'
+                         , 'address_district', 'phone_district', 'fax_district',
+                         'address_campaign', 'phone_campaign', 'date_assumed_office', 'appointed_by', 'appointed_data',
+                         'confirmed_date', 'term_end_data', 'congress_year', 'twitter_personal', 'twitter_campaign',
+                         'youtube_personal', 'youtube_campaign', 'instagram_official', 'instagram_personal',
+                         'instagram_campaign', 'facebook_personal', 'facebook_campaign', 'linkedin', 'rumble', 'gab',
+                         'thomas ID', 'ballotpedia_id', 'washington_post_id', 'wikipedia_id',
+                         'Ballotpedia URL', 'Ballotpedia Office ID']
+
 incumbents_only = ['email_official', 'website_official', 'address_capitol', 'phone_capitol', 'fax_capitol',
                    'address_district', 'phone_district', 'fax_district', 'date_assumed_office', 'appointed_by',
                    'appointed_data', 'confirmed_date', 'term_end_data', 'congress_year', 'twitter_official',

@@ -1,6 +1,8 @@
 import ballotpedia as bp
 import ctcl
 import openstates
+import propublica
+
 import unify
 
 import urllib.error
@@ -8,6 +10,7 @@ import urllib.error
 if __name__ == '__main__':
     available_states = ['AZ', 'CA', 'GA', 'MA', 'MD', 'MS', 'NY', 'OK']
 
+    go = False
     # input loop
     while True:
 
@@ -52,6 +55,9 @@ if __name__ == '__main__':
             else:
                 openstates_df = bp.pd.DataFrame(openstates_data)
                 converted_openstates = openstates.convert_openstates(openstates_df)
+
+            # PROPUBLICA
+            propublica_df = propublica.convert_propublica(state)
 
             # OUTPUT MERGED DATASET
             # check if we have all 3
