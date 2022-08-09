@@ -2,13 +2,11 @@ import ballotpedia as bp
 import ctcl
 import openstates
 import propublica
-
 import unify
-
 import urllib.error
 
 if __name__ == '__main__':
-    available_states = ['AZ', 'CA', 'GA', 'MA', 'MD', 'MS', 'NY', 'OK']
+    available_states = ['AZ', 'CA', 'GA', 'MA', 'IL', 'MD', 'MS', 'NY', 'OK']
 
     go = False
     # input loop
@@ -46,8 +44,6 @@ if __name__ == '__main__':
 
             # OPENSTATES CONVERSION
             openstates_url = 'https://data.openstates.org/people/current/' + state.lower() + '.csv'
-            # openstates_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/' + state.upper() \
-            #                  + '/' + state.lower() + '_openstates_data.csv'
             try:
                 openstates_data = bp.pd.read_csv(openstates_url)
             except urllib.error.HTTPError:
