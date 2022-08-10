@@ -37,8 +37,12 @@ def convert_ctcl(ctcl_df):
                 new_df.loc[i, 'name_middle'] = split_name[1]
                 new_df.loc[i, 'name_last'] = split_name[2]
         elif len(split_name) == 4:
+            suffix_present = False
+            for suffix in dh.suffixes:
+                if suffix in split_name:
+                    suffix_present = True
             # if there's a suffix, store that
-            if 'Jr.' in split_name or 'Sr.' in split_name or 'M.D.' in split_name or 'Ph.D.' in split_name:
+            if suffix_present:
                 new_df.loc[i, 'name_first'] = split_name[0]
                 new_df.loc[i, 'name_middle'] = split_name[1]
                 new_df.loc[i, 'name_last'] = split_name[2]

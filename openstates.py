@@ -31,8 +31,12 @@ def convert_openstates(openstates_df):
                 new_df.loc[i, 'name_middle'] = split_name[1]
                 new_df.loc[i, 'name_last'] = split_name[2]
         elif len(split_name) == 4:
+            suffix_present = False
+            for suffix in dh.suffixes:
+                if suffix in split_name:
+                    suffix_present = True
             # if there's a suffix, store that
-            if 'Jr.' in split_name or 'Sr.' in split_name or 'M.D.' in split_name or 'Ph.D.' in split_name:
+            if suffix_present:
                 new_df.loc[i, 'name_first'] = split_name[0]
                 new_df.loc[i, 'name_middle'] = split_name[1]
                 new_df.loc[i, 'name_last'] = split_name[2]
@@ -48,11 +52,11 @@ def convert_openstates(openstates_df):
     new_df['party'] = openstates_df['current_party']
     for row in new_df.index:
         if openstates_df['current_chamber'][row] == 'upper':
-            new_df['district'] = 'State Senate District ' + str(openstates_df['current_district'][row])
-            new_df['Office'] = 'State Senator District ' + str(openstates_df['current_district'][row])
+            new_df['district'][row] = 'State Senate District ' + str(openstates_df['current_district'][row])
+            new_df['Office'][row] = 'State Senator District ' + str(openstates_df['current_district'][row])
         elif openstates_df['current_chamber'][row] == 'lower':
-            new_df['district'] = 'State House District ' + str(openstates_df['current_district'][row])
-            new_df['Office'] = 'State Representative District ' + str(openstates_df['current_district'][row])
+            new_df['district'][row] = 'State House District ' + str(openstates_df['current_district'][row])
+            new_df['Office'][row] = 'State Representative District ' + str(openstates_df['current_district'][row])
     new_df['gender'] = openstates_df['gender']
     new_df['Image'] = openstates_df['image']
     new_df['email_official'] = openstates_df['email']

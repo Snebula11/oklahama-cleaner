@@ -1,6 +1,6 @@
 import data_headers as dh
 import pandas as pd
-import utilities as u
+import numpy as np
 
 # global variable to track which secondary+ rows match primary
 match = False
@@ -43,7 +43,7 @@ def unify_bp_ctcl(primary_df, secondary_df, third_df=None, fourth_df=None):
         elif primary_df['status'][p_row] == 'Incumbent':
             for field in dh.incumbents_only:
                 if primary_df.loc[p_row, field] == 'n/a':
-                    primary_df.loc[p_row, field] = pd.NA
+                    primary_df.loc[p_row, field] = np.nan
 
     # add rows from the secondary df that weren't in the primary
     added_rows_df = secondary_df.drop(labels=do_not_add, axis=0, inplace=False)

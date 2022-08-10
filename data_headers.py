@@ -71,8 +71,8 @@ propublica_fields = ['Name', 'name_first', 'name_middle', 'name_last', 'name_suf
 non_propublica_fields = ['govpackpub_id', 'govpack_id', 'usio_id', 'opensecrets_id', 'openstates_id',
                          'committee_id', 'nickname', 'name_prefix', 'ethnicity',
                          'race', 'education', 'occupation', 'email_official', 'email_other', 'email_campaign',
-                         'Bio', 'date_of_death', 'Image', 'website_campaign', 'website_personal'
-                         , 'address_district', 'phone_district', 'fax_district',
+                         'Bio', 'date_of_death', 'Image', 'website_campaign', 'website_personal', 'address_district',
+                         'phone_district', 'fax_district',
                          'address_campaign', 'phone_campaign', 'date_assumed_office', 'appointed_by', 'appointed_data',
                          'confirmed_date', 'term_end_data', 'congress_year', 'twitter_personal', 'twitter_campaign',
                          'youtube_personal', 'youtube_campaign', 'instagram_official', 'instagram_personal',
@@ -84,3 +84,5 @@ incumbents_only = ['email_official', 'website_official', 'address_capitol', 'pho
                    'address_district', 'phone_district', 'fax_district', 'date_assumed_office', 'appointed_by',
                    'appointed_data', 'confirmed_date', 'term_end_data', 'congress_year', 'twitter_official',
                    'instagram_official', 'facebook_official']
+
+suffixes = ['Jr.', 'Sr.', 'M.D.', 'Ph.D.', 'I', 'II', 'III', 'IV', 'V']

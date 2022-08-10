@@ -3,18 +3,19 @@ import ctcl
 import openstates
 import propublica
 import unify
+import utilities as util
 import urllib.error
 
 if __name__ == '__main__':
     available_states = ['AZ', 'CA', 'GA', 'MA', 'IL', 'MD', 'MS', 'NY', 'OK']
-
     go = False
+
     # input loop
+    # for state in util.states.keys():
     while True:
 
         state = input('Type the postal abbr. of the state you want: ').upper()
 
-        # if state in available_states
         # OUTPUT FILEPATH
         output_filepath = 'data/' + state.upper() + '/' + state.lower() + '_output.csv'
 
@@ -69,11 +70,9 @@ if __name__ == '__main__':
             unified = unify.unify_bp_ctcl(converted_ctcl, converted_openstates, third_df=converted_propublica)
             unified.to_csv(output_filepath, index=False, encoding='utf-8')
             # pass
-            break
+            # break
         # if we do have all 3
         else:
             print(f'unifying datasets for {state}')
             unified.to_csv(output_filepath, index=False, encoding='utf-8')
-            break
-    # else:
-    #     print("Sorry, we don't have that state available! Maybe we haven't added it, maybe a typo. Try again.")
+            # break

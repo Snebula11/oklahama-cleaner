@@ -9,7 +9,7 @@ def convert_ballotpedia(bp_df):
     # deletes all candidates that either withdrew, lost, or won (we don't need them anymore!)
     rows_to_delete = []
     for i in range(0, len(bp_df.index)):
-        if bp_df['Stage'][i] == 'Primary':
+        if bp_df['Stage'][i] == 'Primary' or bp_df['Stage'][i] == 'Primary Runoff':
             rows_to_delete.append(i)
     bp_df.drop(labels=rows_to_delete, axis=0, inplace=True)
     bp_df.reset_index(inplace=True)
@@ -43,8 +43,12 @@ def convert_ballotpedia(bp_df):
                 new_df.loc[i, 'name_middle'] = split_name[1]
                 new_df.loc[i, 'name_last'] = split_name[2]
         elif len(split_name) == 4:
+            suffix_present = False
+            for suffix in dh.suffixes:
+                if suffix in split_name:
+                    suffix_present = True
             # if there's a suffix, store that
-            if 'Jr.' in split_name or 'Sr.' in split_name or 'M.D.' in split_name or 'Ph.D.' in split_name:
+            if suffix_present:
                 new_df.loc[i, 'name_first'] = split_name[0]
                 new_df.loc[i, 'name_middle'] = split_name[1]
                 new_df.loc[i, 'name_last'] = split_name[2]
