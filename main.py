@@ -12,7 +12,7 @@ if __name__ == '__main__':
     go = False
 
     # input loop
-    # for state in util.states.keys():
+    # while go:
     for state in util.states.keys():
 
         # state = input('Type the postal abbr. of the state you want: ').upper()

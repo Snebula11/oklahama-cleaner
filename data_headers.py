@@ -83,6 +83,6 @@ non_propublica_fields = ['govpackpub_id', 'govpack_id', 'usio_id', 'opensecrets_
 incumbents_only = ['email_official', 'website_official', 'address_capitol', 'phone_capitol', 'fax_capitol',
                    'address_district', 'phone_district', 'fax_district', 'date_assumed_office', 'appointed_by',
                    'appointed_data', 'confirmed_date', 'term_end_data', 'congress_year', 'twitter_official',
-                   'instagram_official', 'facebook_official']
+                   'instagram_official', 'facebook_official', 'youtube_official']
 
 suffixes = ['Jr.', 'Sr.', 'M.D.', 'Ph.D.', 'I', 'II', 'III', 'IV', 'V']
