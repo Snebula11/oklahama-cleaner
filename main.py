@@ -7,12 +7,9 @@ import utilities as util
 import urllib.error
 
 if __name__ == '__main__':
-    available_states = ['AZ', 'CA', 'GA', 'MA', 'IL', 'MD', 'MS', 'NY', 'OK']
     converted_bp = converted_ctcl = converted_propublica = converted_openstates = None
-    go = False
 
     # input loop
-    # while go:
     for state in util.states.keys():
 
         # state = input('Type the postal abbr. of the state you want: ').upper()
