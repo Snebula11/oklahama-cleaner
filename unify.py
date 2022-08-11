@@ -37,7 +37,7 @@ def unify_bp_ctcl(primary_df, secondary_df, third_df=None, fourth_df=None):
             if match:
                 # we add that row to our no-fly list
                 do_not_add.append(s_row)
-                # break
+                match = False
         if primary_df['status'][p_row] == 'Challenger':
             for field in dh.incumbents_only:
                 if not pd.isna(primary_df.loc[p_row, field]):
@@ -83,7 +83,7 @@ def unify_bp_ctcl(primary_df, secondary_df, third_df=None, fourth_df=None):
                 if match:
                     # we add that row to our no-fly list
                     do_not_add.append(t_row)
-                    break
+                    match = False
         # add rows from the secondary df that weren't in the primary
         added_rows_df = third_df.drop(labels=do_not_add, axis=0, inplace=False)
         added_rows_df.reset_index(inplace=True, drop=True)
@@ -120,7 +120,7 @@ def unify_bp_ctcl(primary_df, secondary_df, third_df=None, fourth_df=None):
                 if match:
                     # we add that row to our no-fly list
                     do_not_add.append(f_row)
-                    break
+                    match = False
         # add rows from the secondary df that weren't in the primary
         added_rows_df = fourth_df.drop(labels=do_not_add, axis=0, inplace=False)
         added_rows_df.reset_index(inplace=True, drop=True)
