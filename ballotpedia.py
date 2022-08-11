@@ -9,7 +9,12 @@ def convert_ballotpedia(bp_df):
     # deletes all candidates that either withdrew, lost, or won (we don't need them anymore!)
     rows_to_delete = []
     for i in range(0, len(bp_df.index)):
-        if bp_df['Stage'][i] == 'Primary' or bp_df['Stage'][i] == 'Primary Runoff':
+        row_stage = bp_df['Stage'][i]
+        row_race_type = bp_df['Race type'][i]
+
+        if row_stage == 'Primary' or row_stage == 'Primary Runoff':
+            rows_to_delete.append(i)
+        elif (row_race_type == 'Special' or row_race_type == 'Recall') and row_stage == 'General':
             rows_to_delete.append(i)
     bp_df.drop(labels=rows_to_delete, axis=0, inplace=True)
     bp_df.reset_index(inplace=True)

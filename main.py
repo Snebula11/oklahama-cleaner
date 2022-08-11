@@ -10,9 +10,9 @@ if __name__ == '__main__':
     converted_bp = converted_ctcl = converted_propublica = converted_openstates = None
 
     # input loop
-    for state in util.states.keys():
-
-        # state = input('Type the postal abbr. of the state you want: ').upper()
+    # for state in util.states.keys():
+    while True:
+        state = input('Type the postal abbr. of the state you want: ').upper()
 
         # OUTPUT FILEPATH
         output_filepath = 'data/' + state.upper() + '/' + state.lower() + '_output.csv'
@@ -64,6 +64,7 @@ if __name__ == '__main__':
                                           third_df=converted_openstates,
                                           fourth_df=converted_propublica)
             unified.to_csv(output_filepath, index=False, encoding='utf-8')
+            converted_bp = converted_ctcl = converted_propublica = converted_openstates = None
         # if we do not
         elif converted_bp is None:
             print(f'unifying 3 datasets for {state}')
@@ -71,5 +72,4 @@ if __name__ == '__main__':
                                           converted_openstates,
                                           third_df=converted_propublica)
             unified.to_csv(output_filepath, index=False, encoding='utf-8')
-
-        converted_bp = converted_ctcl = converted_propublica = converted_openstates = None
+            converted_bp = converted_ctcl = converted_propublica = converted_openstates = None

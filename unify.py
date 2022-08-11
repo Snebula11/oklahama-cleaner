@@ -17,10 +17,12 @@ def unify_bp_ctcl(primary_df, secondary_df, third_df=None, fourth_df=None):
         # seeing if we find a match
         match = False
         # find the candidate's name in primary
-        search_name = str(primary_df.loc[p_row, 'name_first']) + ' ' + str(primary_df.loc[p_row, 'name_last'])
+        search_name = str(primary_df.loc[p_row, 'name_first']) + str(primary_df.loc[p_row, 'name_last'])
         # check each secondary row against the selected primary row
         for s_row in secondary_df.index:
-            curr_name = str(secondary_df.loc[s_row, 'name_first']) + ' ' + str(secondary_df.loc[s_row, 'name_last'])
+            curr_name = str(secondary_df.loc[s_row, 'name_first']) + str(secondary_df.loc[s_row, 'name_last'])
+            # if search_name == 'AlexPadilla':
+            #     print(f'looking for {search_name} found {curr_name} on {s_row}\n')
             # if the candidate matches, we go through each cell in the row and fill it in if it's blank
             if search_name == curr_name:
                 # we found a match, so...
@@ -35,7 +37,7 @@ def unify_bp_ctcl(primary_df, secondary_df, third_df=None, fourth_df=None):
             if match:
                 # we add that row to our no-fly list
                 do_not_add.append(s_row)
-                break
+                # break
         if primary_df['status'][p_row] == 'Challenger':
             for field in dh.incumbents_only:
                 if not pd.isna(primary_df.loc[p_row, field]):
