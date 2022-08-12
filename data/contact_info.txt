@@ -1,0 +1,60 @@
+AZ: 
+Ballotpedia covers 18.18% of emails for its 11 rows
+Ballotpedia covers 18.18% of phone #s for its 11 rows
+CTCL covers 77.99% of emails for its 159 rows
+CTCL covers 52.2% of phone #s for its 159 rows
+
+CA: 
+Ballotpedia covers 73.48% of emails for its 328 rows
+Ballotpedia covers 54.57% of phone #s for its 328 rows
+CTCL covers 90.8% of emails for its 685 rows
+CTCL covers 76.06% of phone #s for its 685 rows
+
+CT: 
+Ballotpedia covers 55.08% of emails for its 354 rows
+Ballotpedia covers 24.58% of phone #s for its 354 rows
+CTCL covers 64.52% of emails for its 31 rows
+CTCL covers 38.71% of phone #s for its 31 rows
+
+GA: 
+Ballotpedia covers 35.32% of emails for its 436 rows
+Ballotpedia covers 4.13% of phone #s for its 436 rows
+CTCL covers 89.6% of emails for its 654 rows
+CTCL covers 48.32% of phone #s for its 654 rows
+
+IL: 
+Ballotpedia covers 31.13% of emails for its 363 rows
+Ballotpedia covers 11.57% of phone #s for its 363 rows
+CTCL covers 72.41% of emails for its 348 rows
+CTCL covers 35.63% of phone #s for its 348 rows
+
+MD: 
+Ballotpedia covers 29.51% of emails for its 305 rows
+Ballotpedia covers 9.51% of phone #s for its 305 rows
+CTCL covers 94.52% of emails for its 310 rows
+CTCL covers 81.61% of phone #s for its 310 rows
+
+MA: 
+Ballotpedia covers 57.14% of emails for its 7 rows
+Ballotpedia covers 42.86% of phone #s for its 7 rows
+CTCL covers 0.0% of emails for its 312 rows
+CTCL covers 0.0% of phone #s for its 312 rows
+
+MS: 
+Ballotpedia covers 50.0% of emails for its 20 rows
+Ballotpedia covers 20.0% of phone #s for its 20 rows
+CTCL covers 88.89% of emails for its 9 rows
+CTCL covers 33.33% of phone #s for its 9 rows
+
+NC: 
+Ballotpedia covers 65.94% of emails for its 367 rows
+Ballotpedia covers 32.97% of phone #s for its 367 rows
+CTCL covers 78.98% of emails for its 352 rows
+CTCL covers 87.78% of phone #s for its 352 rows
+
+WI: 
+Ballotpedia covers 16.13% of emails for its 31 rows
+Ballotpedia covers 6.45% of phone #s for its 31 rows
+CTCL covers 79.32% of emails for its 324 rows
+CTCL covers 45.99% of phone #s for its 324 rows
+
