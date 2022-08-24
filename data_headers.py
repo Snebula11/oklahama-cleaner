@@ -1,7 +1,7 @@
 mapped_data = ['govpackpub_id', 'govpack_id', 'fec_id', 'usio_id', 'opensecrets_id', 'district_ocd_id',
-               'openstates_id', 'committee_id', 'Name', 'name_first', 'name_middle', 'name_last', 'nickname',
-               'name_prefix', 'name_suffix', 'party', 'state', 'status', 'district', 'ethnicity', 'race', 'gender',
-               'education', 'occupation', 'Office', 'email_official', 'email_other', 'email_campaign', 'Bio',
+               'openstates_id', 'committee_id', 'name', 'name_first', 'name_middle', 'name_last', 'nickname',
+               'name_prefix', 'name_suffix', 'title', 'party', 'state', 'status', 'district', 'ethnicity', 'race',
+               'gender', 'education', 'occupation', 'Office', 'email_official', 'email_other', 'email_campaign', 'Bio',
                'date_of_birth', 'date_of_death', 'Image', 'website_campaign', 'website_official', 'website_personal',
                'address_capitol', 'phone_capitol', 'fax_capitol', 'address_district', 'phone_district', 'fax_district',
                'contact_form_url', 'address_campaign', 'phone_campaign', 'date_assumed_office', 'appointed_by',
@@ -12,7 +12,7 @@ mapped_data = ['govpackpub_id', 'govpack_id', 'fec_id', 'usio_id', 'opensecrets_
                'cspan_id', 'govtrack_id', 'votesmart_id', 'ballotpedia_id', 'washington_post_id', 'icpsr_id',
                'wikipedia_id', 'google_entity_id', 'Ballotpedia URL', 'propublica URL', 'Ballotpedia Office ID']
 
-ballotpedia_fields = ['district_ocd_id', 'Name', 'name_first', 'name_middle', 'name_last', 'name_suffix', 'party',
+ballotpedia_fields = ['district_ocd_id', 'name', 'name_first', 'name_middle', 'name_last', 'name_suffix', 'party',
                       'state', 'district', 'gender', 'Office', 'email_other', 'email_campaign', 'website_campaign',
                       'website_personal', 'address_campaign', 'phone_campaign', 'twitter_personal', 'twitter_campaign',
                       'instagram_personal', 'instagram_campaign', 'facebook_personal', 'facebook_campaign', 'linkedin',
@@ -28,7 +28,7 @@ non_bp_fields = ['govpackpub_id', 'govpack_id', 'fec_id', 'usio_id', 'opensecret
                  'ballotpedia_id', 'washington_post_id', 'icpsr_id', 'wikipedia_id', 'google_entity_id',
                  'propublica URL', 'youtube_official']
 
-openstates_data = ['openstates_id', 'Name', 'name_first', 'name_middle', 'name_last', 'nickname', 'name_suffix',
+openstates_data = ['openstates_id', 'name', 'name_first', 'name_middle', 'name_last', 'nickname', 'name_suffix',
                    'party', 'district', 'Office', 'gender', 'email_official', 'Bio', 'date_of_birth', 'date_of_death',
                    'Image', 'status', 'address_capitol', 'phone_capitol', 'fax_capitol', 'address_district',
                    'phone_district', 'fax_district', 'youtube_campaign', 'twitter_campaign', 'instagram_campaign',
@@ -45,7 +45,7 @@ non_openstates_data = ['govpackpub_id', 'govpack_id', 'fec_id', 'usio_id', 'open
                        'washington_post_id', 'icpsr_id', 'wikipedia_id', 'google_entity_id', 'Ballotpedia URL',
                        'propublica URL', 'Ballotpedia Office ID']
 
-ctcl_fields = ['state', 'Office', 'Name', 'name_first', 'name_middle', 'name_last', 'nickname', 'name_prefix',
+ctcl_fields = ['state', 'Office', 'name', 'name_first', 'name_middle', 'name_last', 'nickname', 'name_prefix',
                'name_suffix', 'party', 'phone_campaign', 'address_campaign', 'website_campaign', 'website_personal',
                'email_campaign', 'Image', 'facebook_official', 'facebook_personal', 'facebook_campaign',
                'twitter_official', 'twitter_personal', 'twitter_campaign', 'instagram_official', 'instagram_personal',
@@ -62,7 +62,7 @@ non_ctcl_fields = ['govpackpub_id', 'govpack_id', 'fec_id', 'usio_id', 'opensecr
                    'washington_post_id', 'icpsr_id', 'google_entity_id', 'Ballotpedia URL',
                    'propublica URL', 'Ballotpedia Office ID']
 
-propublica_fields = ['Name', 'name_first', 'name_middle', 'name_last', 'name_suffix', 'date_of_birth', 'propublica URL',
+propublica_fields = ['name', 'name_first', 'name_middle', 'name_last', 'name_suffix', 'date_of_birth', 'propublica URL',
                      'gender', 'youtube_official', 'twitter_official', 'facebook_official', 'cspan_id', 'govtrack_id',
                      'votesmart_id', 'icpsr_id', 'google_entity_id', 'fec_id', 'RSS', 'website_official', 'status',
                      'district_ocd_id', 'address_capitol', 'phone_capitol', 'fax_capitol', 'state', 'party', 'district',

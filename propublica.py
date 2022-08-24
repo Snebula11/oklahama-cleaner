@@ -15,16 +15,17 @@ def convert_propublica(state):
     new_df['name_middle'] = p_df['middle_name']
     new_df['name_last'] = p_df['last_name']
     new_df['name_suffix'] = p_df['suffix']
+    new_df['title'] = p_df['title']
 
     for row in p_df.index:
         if pd.isna(p_df['middle_name'][row]):
-            new_df['Name'][row] = p_df['first_name'][row] + ' ' + p_df['last_name'][row]
+            new_df['name'][row] = p_df['first_name'][row] + ' ' + p_df['last_name'][row]
         else:
-            new_df['Name'][row] = p_df['first_name'][row] + ' ' \
+            new_df['name'][row] = p_df['first_name'][row] + ' ' \
                                   + p_df['middle_name'][row] + ' ' \
                                   + p_df['last_name'][row]
         if not pd.isna(p_df['suffix'][row]):
-            new_df['Name'][row] = new_df['Name'][row] + ', ' + p_df['suffix'][row]
+            new_df['name'][row] = new_df['name'][row] + ', ' + p_df['suffix'][row]
 
     new_df['date_of_birth'] = p_df['date_of_birth']
 

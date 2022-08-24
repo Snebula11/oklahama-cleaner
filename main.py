@@ -7,10 +7,11 @@ import utilities as util
 import urllib.error
 
 converted_bp = converted_ctcl = converted_openstates = converted_propublica = None
+openstates_us_df = bp.pd.DataFrame(bp.pd.read_csv('https://data.openstates.org/people/current/us.csv'))
 
 
 def merge_data(state):
-    global converted_bp, converted_ctcl, converted_openstates, converted_propublica
+    global converted_bp, converted_ctcl, converted_openstates, converted_propublica, openstates_us_df
 
     # OUTPUT FILEPATH
     output_filepath = 'data/' + state.upper() + '/' + state.lower() + '_output.csv'
@@ -40,10 +41,11 @@ def merge_data(state):
         converted_ctcl = ctcl.convert_ctcl(ctcl_df)
 
     # OPENSTATES CONVERSION
-    openstates_url = 'https://data.openstates.org/people/current/' + state.lower() + '.csv'
-    openstates_data = bp.pd.read_csv(openstates_url)
-    openstates_df = bp.pd.DataFrame(openstates_data)
-    converted_openstates = openstates.convert_openstates(openstates_df)
+    openstates_state_url = 'https://data.openstates.org/people/current/' + state.lower() + '.csv'
+    openstates_state_data = bp.pd.read_csv(openstates_state_url)
+    openstates_state_df = bp.pd.DataFrame(openstates_state_data)
+
+    converted_openstates = openstates.convert_openstates(openstates_state_df, openstates_us_df, state)
 
     # PROPUBLICA
     converted_propublica = propublica.convert_propublica(state)

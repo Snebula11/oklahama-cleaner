@@ -27,18 +27,23 @@ def convert_ballotpedia(bp_df):
     new_df['district'] = bp_df['District name']
     new_df['district_ocd_id'] = bp_df['District OCDID']
     new_df['ballotpedia_id'] = bp_df['Person ID']
-    new_df['Name'] = bp_df['Name']
+    new_df['name'] = bp_df['Name']
     # get the last and middle names
     for i in new_df.index:
         # split the name into a list
-        split_name = str(new_df['Name'][i]).split()
+        split_name = str(new_df['name'][i]).split()
+        # find a suffix
+        suffix_present = False
+        for suffix in dh.suffixes:
+            if suffix in split_name:
+                suffix_present = True
         # if it's just a first and last, store them
         if len(split_name) == 2:
             new_df.loc[i, 'name_first'] = split_name[0]
             new_df.loc[i, 'name_last'] = split_name[1]
         elif len(split_name) == 3:
             # if there's a suffix, store that
-            if 'Jr.' in split_name or 'Sr.' in split_name or 'M.D.' in split_name or 'Ph.D.' in split_name:
+            if suffix_present:
                 new_df.loc[i, 'name_first'] = split_name[0]
                 new_df.loc[i, 'name_last'] = split_name[1]
                 new_df.loc[i, 'name_suffix'] = split_name[2]
@@ -48,10 +53,6 @@ def convert_ballotpedia(bp_df):
                 new_df.loc[i, 'name_middle'] = split_name[1]
                 new_df.loc[i, 'name_last'] = split_name[2]
         elif len(split_name) == 4:
-            suffix_present = False
-            for suffix in dh.suffixes:
-                if suffix in split_name:
-                    suffix_present = True
             # if there's a suffix, store that
             if suffix_present:
                 new_df.loc[i, 'name_first'] = split_name[0]

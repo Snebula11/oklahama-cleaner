@@ -1,27 +1,49 @@
 import pandas as pd
 import numpy as np
 import data_headers as dh
+import utilities as util
 
 
-def convert_openstates(openstates_df):
+def convert_openstates(openstates_df, us_df, state):
     # makes our new DataFrame, with the fields we want
+    state = util.statenames(state.upper())
+    do_not_add = []
+
+    for row in us_df.index:
+        curr_state = us_df['current_district'][row]
+        if '-' in curr_state:
+            curr_state = curr_state.split('-')
+            curr_state = util.statenames(curr_state[0])
+        if curr_state != state:
+            do_not_add.append(row)
+
+    us_df.drop(labels=do_not_add, axis=0, inplace=True)
+    us_df.reset_index(inplace=True, drop=True)
+    openstates_df = pd.concat([openstates_df, us_df], ignore_index=True)
+    openstates_df.reset_index(inplace=True, drop=True)
+
     new_df = pd.DataFrame(columns=dh.mapped_data)
 
     new_df['openstates_id'] = openstates_df['id']
 
-    new_df['Name'] = openstates_df['name']
+    new_df['name'] = openstates_df['name']
     # get the last and middle names
     for i in new_df.index:
         # split the name into a list
-        name_to_split = str(new_df['Name'][i]).replace(',', '')
+        name_to_split = str(new_df['name'][i]).replace(',', '')
         split_name = name_to_split.split()
+        # find a suffix
+        suffix_present = False
+        for suffix in dh.suffixes:
+            if suffix in split_name:
+                suffix_present = True
         # if it's just a first and last, store them
         if len(split_name) == 2:
             new_df.loc[i, 'name_first'] = split_name[0]
             new_df.loc[i, 'name_last'] = split_name[1]
         elif len(split_name) == 3:
             # if there's a suffix, store that
-            if 'Jr.' in split_name or 'Sr.' in split_name or 'M.D.' in split_name or 'Ph.D.' in split_name:
+            if suffix_present:
                 new_df.loc[i, 'name_first'] = split_name[0]
                 new_df.loc[i, 'name_last'] = split_name[1]
                 new_df.loc[i, 'name_suffix'] = split_name[2]
@@ -31,10 +53,6 @@ def convert_openstates(openstates_df):
                 new_df.loc[i, 'name_middle'] = split_name[1]
                 new_df.loc[i, 'name_last'] = split_name[2]
         elif len(split_name) == 4:
-            suffix_present = False
-            for suffix in dh.suffixes:
-                if suffix in split_name:
-                    suffix_present = True
             # if there's a suffix, store that
             if suffix_present:
                 new_df.loc[i, 'name_first'] = split_name[0]

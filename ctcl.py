@@ -15,19 +15,24 @@ def convert_ctcl(ctcl_df):
             new_df['Office'][row] = str(ctcl_df['Office Name'][row]) + ' ' + str(ctcl_df['Seat'][row]).title()
         else:
             new_df['Office'][row] = ctcl_df['Office Name'][row]
-    new_df['Name'] = ctcl_df['Candidate Name']
+    new_df['name'] = ctcl_df['Candidate Name']
     # get the last and middle names
     for i in new_df.index:
         # split the name into a list
-        name_to_split = str(new_df['Name'][i]).replace(',', '')
+        name_to_split = str(new_df['name'][i]).replace(',', '')
         split_name = name_to_split.split()
+        # find a suffix
+        suffix_present = False
+        for suffix in dh.suffixes:
+            if suffix in split_name:
+                suffix_present = True
         # if it's just a first and last, store them
         if len(split_name) == 2:
             new_df.loc[i, 'name_first'] = split_name[0]
             new_df.loc[i, 'name_last'] = split_name[1]
         elif len(split_name) == 3:
             # if there's a suffix, store that
-            if 'Jr.' in split_name or 'Sr.' in split_name or 'M.D.' in split_name or 'Ph.D.' in split_name:
+            if suffix_present:
                 new_df.loc[i, 'name_first'] = split_name[0]
                 new_df.loc[i, 'name_last'] = split_name[1]
                 new_df.loc[i, 'name_suffix'] = split_name[2]
@@ -37,10 +42,6 @@ def convert_ctcl(ctcl_df):
                 new_df.loc[i, 'name_middle'] = split_name[1]
                 new_df.loc[i, 'name_last'] = split_name[2]
         elif len(split_name) == 4:
-            suffix_present = False
-            for suffix in dh.suffixes:
-                if suffix in split_name:
-                    suffix_present = True
             # if there's a suffix, store that
             if suffix_present:
                 new_df.loc[i, 'name_first'] = split_name[0]
