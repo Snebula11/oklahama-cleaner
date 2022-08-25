@@ -12,6 +12,22 @@ mapped_data = ['govpackpub_id', 'govpack_id', 'fec_id', 'usio_id', 'opensecrets_
                'cspan_id', 'govtrack_id', 'votesmart_id', 'ballotpedia_id', 'washington_post_id', 'icpsr_id',
                'wikipedia_id', 'google_entity_id', 'Ballotpedia URL', 'propublica URL', 'Ballotpedia Office ID']
 
+new_column_headers = ['name', 'name_first', 'name_middle', 'name_last', 'nickname', 'name_prefix', 'name_suffix',
+                      'Image', 'party', 'Office', 'title', 'state', 'status', 'district', 'ethnicity', 'race', 'gender',
+                      'date_of_birth', 'date_of_death', 'education', 'occupation', 'Bio', 'email_official',
+                      'email_other', 'email_campaign', 'website_official', 'website_personal', 'website_campaign',
+                      'twitter_official', 'twitter_personal', 'twitter_campaign', 'youtube_official',
+                      'youtube_personal', 'youtube_campaign', 'instagram_official', 'instagram_personal',
+                      'instagram_campaign', 'facebook_official', 'facebook_personal', 'facebook_campaign', 'linkedin',
+                      'rumble', 'gab', 'RSS', 'address_campaign', 'address_capitol', 'address_district',
+                      'phone_campaign', 'phone_capitol', 'phone_district', 'fax_capitol', 'fax_district',
+                      'contact_form_url', 'date_assumed_office', 'appointed_by', 'appointed_data', 'confirmed_date',
+                      'term_end_data', 'congress_year', 'thomas ID', 'lis_id', 'cspan_id', 'govtrack_id',
+                      'votesmart_id', 'ballotpedia_id', 'washington_post_id', 'icpsr_id', 'wikipedia_id',
+                      'google_entity_id', 'Ballotpedia URL', 'propublica URL', 'Ballotpedia Office ID', 'govpackpub_id',
+                      'govpack_id', 'fec_id', 'usio_id', 'opensecrets_id', 'district_ocd_id', 'openstates_id',
+                      'committee_id']
+
 ballotpedia_fields = ['district_ocd_id', 'name', 'name_first', 'name_middle', 'name_last', 'name_suffix', 'party',
                       'state', 'district', 'gender', 'Office', 'email_other', 'email_campaign', 'website_campaign',
                       'website_personal', 'address_campaign', 'phone_campaign', 'twitter_personal', 'twitter_campaign',

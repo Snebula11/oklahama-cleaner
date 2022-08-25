@@ -4,7 +4,7 @@ import data_headers as dh
 
 def convert_ballotpedia(bp_df):
     # makes our new DataFrame, with the fields we want
-    new_df = pd.DataFrame(columns=dh.mapped_data)
+    new_df = pd.DataFrame(columns=dh.new_column_headers)
 
     # deletes all candidates that either withdrew, lost, or won (we don't need them anymore!)
     rows_to_delete = []

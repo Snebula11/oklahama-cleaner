@@ -5,7 +5,7 @@ import data_headers as dh
 
 def convert_ctcl(ctcl_df):
     # makes our new DataFrame, with the fields we want
-    new_df = pd.DataFrame(columns=dh.mapped_data)
+    new_df = pd.DataFrame(columns=dh.new_column_headers)
 
     # START TO CHANGE OVER COLUMNS #
     new_df['state'] = ctcl_df['State']

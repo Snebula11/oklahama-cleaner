@@ -9,7 +9,7 @@ def convert_propublica(state):
         p_df = p_df[p_df['state'] == state]
         p_df = p_df.reset_index()
 
-    new_df = pd.DataFrame(columns=dh.mapped_data)
+    new_df = pd.DataFrame(columns=dh.new_column_headers)
 
     new_df['name_first'] = p_df['first_name']
     new_df['name_middle'] = p_df['middle_name']

@@ -22,7 +22,7 @@ def convert_openstates(openstates_df, us_df, state):
     openstates_df = pd.concat([openstates_df, us_df], ignore_index=True)
     openstates_df.reset_index(inplace=True, drop=True)
 
-    new_df = pd.DataFrame(columns=dh.mapped_data)
+    new_df = pd.DataFrame(columns=dh.new_column_headers)
 
     new_df['openstates_id'] = openstates_df['id']
 
