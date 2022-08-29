@@ -53,8 +53,6 @@ def convert_propublica(state):
                 new_df.loc[row, 'district'] = long_state + ' Congressional District ' + curr_dist
                 new_df.loc[row, 'Office'] = 'U.S. House ' + long_state + ' District ' + curr_dist
 
-    new_df['title'] = p_df['title']
-
     new_df['state'] = p_df['state']
 
     for row in new_df.index:

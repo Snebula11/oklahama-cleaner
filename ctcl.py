@@ -82,7 +82,7 @@ def convert_ctcl(ctcl_df, state):
                 new_df.loc[row, 'Office'] = 'U.S. House ' + long_state + ' ' + district
                 new_df.loc[row, 'district'] = long_state + ' Congressional ' + district
             elif ctcl_df['Role'][row] == 'legislatorUpperBody':
-                new_df.loc[row, 'Office'] = 'U.S. Senate' + long_state
+                new_df.loc[row, 'Office'] = 'U.S. Senate ' + long_state
                 new_df.loc[row, 'district'] = long_state + ' Statewide'
 
         elif ctcl_df['Role'][row] != 'governmentOfficer':

@@ -105,8 +105,8 @@ def convert_openstates(openstates_df, us_df, state):
         else:
             if openstates_df['current_chamber'][row] == 'upper':
                 new_df.loc[row, 'title'] = 'U.S. Senator'
-                new_df.loc[row, 'district'] = long_state + 'Statewide'
-                new_df.loc[row, 'Office'] = 'U.S. Senate' + long_state
+                new_df.loc[row, 'district'] = long_state + ' Statewide'
+                new_df.loc[row, 'Office'] = 'U.S. Senate ' + long_state
             elif openstates_df['current_chamber'][row] == 'lower':
                 congress_dist = str(openstates_df['current_district'][row].split('-')[1])
                 new_df.loc[row, 'title'] = 'U.S. Representative'
