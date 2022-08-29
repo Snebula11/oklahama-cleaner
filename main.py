@@ -26,7 +26,7 @@ def merge_data(state):
         pass
     else:
         bp_df = bp.pd.DataFrame(bp_data)
-        converted_bp = bp.convert_ballotpedia(bp_df)
+        converted_bp = bp.convert_ballotpedia(bp_df, state)
 
     # CTCL CONVERSION
     ctcl_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/' + state.upper() + '/' \
@@ -38,7 +38,7 @@ def merge_data(state):
         pass
     else:
         ctcl_df = bp.pd.DataFrame(ctcl_data)
-        converted_ctcl = ctcl.convert_ctcl(ctcl_df)
+        converted_ctcl = ctcl.convert_ctcl(ctcl_df, state)
 
     # OPENSTATES CONVERSION
     openstates_state_url = 'https://data.openstates.org/people/current/' + state.lower() + '.csv'
