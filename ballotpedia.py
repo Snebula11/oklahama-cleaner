@@ -85,7 +85,7 @@ def convert_ballotpedia(bp_df, state):
         split_office = bp_df['Office name'][row].split(' ')
 
         if bp_df['District type'][row] == 'Congress':
-            new_df.loc[row, 'Office'] = bp_df['Office name'][row]
+            new_df.loc[row, 'office'] = bp_df['Office name'][row]
             if split_office[1] == 'House':
                 new_df.loc[row, 'district'] = long_state + ' Congressional District ' + split_office[-1]
                 new_df.loc[row, 'title'] = 'U.S. Representative'
@@ -94,23 +94,23 @@ def convert_ballotpedia(bp_df, state):
                 new_df[row, 'title'] = 'U.S. Senator'
 
         elif bp_df['District type'][row] == 'State Legislative (Lower)':
-            new_df.loc[row, 'Office'] = long_state + ' State House District ' + split_office[-1]
+            new_df.loc[row, 'office'] = long_state + ' State House District ' + split_office[-1]
             new_df.loc[row, 'district'] = long_state + ' State House District ' + split_office[-1]
             new_df.loc[row, 'title'] = long_state + ' State Representative'
 
         elif bp_df['District type'][row] == 'State Legislative (Upper)':
-            new_df.loc[row, 'Office'] = long_state + ' State Senate District ' + split_office[-1]
+            new_df.loc[row, 'office'] = long_state + ' State Senate District ' + split_office[-1]
             new_df.loc[row, 'district'] = long_state + ' State Senate District ' + split_office[-1]
             new_df.loc[row, 'title'] = long_state + ' State Senator'
 
         elif bp_df['District type'][row] == 'State':
-            new_df.loc[row, 'Office'] = bp_df['Office name'][row]
+            new_df.loc[row, 'office'] = bp_df['Office name'][row]
             new_df.loc[row, 'district'] = long_state + ' Statewide'
             # No title due to high variation in office type
 
         # In AZ, this accounts for school districts only (spot check other states)
         else:
-            new_df.loc[row, 'Office'] = bp_df['Office name'][row]
+            new_df.loc[row, 'office'] = bp_df['Office name'][row]
             new_df.loc[row, 'district'] = bp_df['District name'][row]
             # No title due to high variation in office type
 
@@ -118,9 +118,9 @@ def convert_ballotpedia(bp_df, state):
 
     for row in new_df.index:
         if bp_df['Incumbent?'][row] == 'No':
-            for field in dh.incumbents_only:
-                if pd.isna(new_df.loc[row, field]):
-                    new_df.loc[row, field] = 'n/a'
+            # for field in dh.incumbents_only:
+            #     if pd.isna(new_df.loc[row, field]):
+            #         new_df.loc[row, field] = 'n/a'
             new_df.loc[row, 'status'] = 'Challenger'
         elif bp_df['Incumbent?'][row] == 'Yes':
             new_df.loc[row, 'status'] = 'Incumbent'
@@ -159,7 +159,7 @@ def convert_ballotpedia(bp_df, state):
 
     new_df['ballotpedia_id'] = bp_df['Person ID']
     new_df['Ballotpedia URL'] = bp_df['Ballotpedia URL']
-    new_df['Ballotpedia Office ID'] = bp_df['Office ID']
+    new_df['ballotpedia Office ID'] = bp_df['Office ID']
 
     new_df['district_ocd_id'] = bp_df['District OCDID']
 

@@ -85,7 +85,7 @@ def convert_openstates(openstates_df, us_df, state):
             new_df.loc[i, 'nickname'] = new_df.loc[i, 'name_middle']
             new_df.loc[i, 'name_middle'] = np.nan
 
-    new_df['Image'] = openstates_df['image']
+    new_df['image'] = openstates_df['image']
 
     new_df['party'] = openstates_df['current_party']
 
@@ -96,22 +96,22 @@ def convert_openstates(openstates_df, us_df, state):
             if openstates_df['current_chamber'][row] == 'upper':
                 new_df.loc[row, 'title'] = long_state + ' State Senator'
                 new_df.loc[row, 'district'] = long_state + ' State Senate District ' + curr_dist
-                new_df.loc[row, 'Office'] = long_state + ' State Senate District ' + curr_dist
+                new_df.loc[row, 'office'] = long_state + ' State Senate District ' + curr_dist
             elif openstates_df['current_chamber'][row] == 'lower':
                 new_df.loc[row, 'title'] = long_state + ' State Representative'
                 new_df.loc[row, 'district'] = long_state + ' State House District ' + curr_dist
-                new_df.loc[row, 'Office'] = long_state + ' State House District ' + curr_dist
+                new_df.loc[row, 'office'] = long_state + ' State House District ' + curr_dist
 
         else:
             if openstates_df['current_chamber'][row] == 'upper':
                 new_df.loc[row, 'title'] = 'U.S. Senator'
                 new_df.loc[row, 'district'] = long_state + ' Statewide'
-                new_df.loc[row, 'Office'] = 'U.S. Senate ' + long_state
+                new_df.loc[row, 'office'] = 'U.S. Senate ' + long_state
             elif openstates_df['current_chamber'][row] == 'lower':
                 congress_dist = str(openstates_df['current_district'][row].split('-')[1])
                 new_df.loc[row, 'title'] = 'U.S. Representative'
                 new_df.loc[row, 'district'] = long_state + ' Congressional District ' + congress_dist
-                new_df.loc[row, 'Office'] = 'U.S. House ' + long_state + ' District ' + congress_dist
+                new_df.loc[row, 'office'] = 'U.S. House ' + long_state + ' District ' + congress_dist
 
     new_df['state'] = state.upper()
 
@@ -122,7 +122,7 @@ def convert_openstates(openstates_df, us_df, state):
     new_df['date_of_birth'] = openstates_df['birth_date']
     new_df['date_of_death'] = openstates_df['death_date']
 
-    new_df['Bio'] = openstates_df['biography']
+    new_df['bio'] = openstates_df['biography']
 
     new_df['email_official'] = openstates_df['email']
 

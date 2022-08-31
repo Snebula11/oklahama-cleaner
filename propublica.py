@@ -38,7 +38,7 @@ def convert_propublica(state):
     for row in new_df.index:
         if pd.isna(p_df['district'][row]):
             new_df.loc[row, 'district'] = long_state + ' Statewide'
-            new_df.loc[row, 'Office'] = 'U.S. Senate ' + long_state
+            new_df.loc[row, 'office'] = 'U.S. Senate ' + long_state
             new_df.loc[row, 'title'] = 'U.S. Senator'
 
         else:
@@ -46,12 +46,12 @@ def convert_propublica(state):
 
             if p_df['district'][row] == 'At-Large':
                 new_df.loc[row, 'district'] = long_state + ' At-Large Congressional District'
-                new_df.loc[row, 'Office'] = 'U.S. House ' + long_state + ' At-Large District'
+                new_df.loc[row, 'office'] = 'U.S. House ' + long_state + ' At-Large District'
 
             else:
                 curr_dist = str(p_df['district'][row])
                 new_df.loc[row, 'district'] = long_state + ' Congressional District ' + curr_dist
-                new_df.loc[row, 'Office'] = 'U.S. House ' + long_state + ' District ' + curr_dist
+                new_df.loc[row, 'office'] = 'U.S. House ' + long_state + ' District ' + curr_dist
 
     new_df['state'] = p_df['state']
 
@@ -91,7 +91,7 @@ def convert_propublica(state):
             new_df.loc[row, 'facebook_official'] = 'https://www.facebook.com/' + \
                                                    str(new_df.loc[row, 'facebook_official'])
 
-    new_df['RSS'] = p_df['rss_url']
+    new_df['rss'] = p_df['rss_url']
 
     new_df['address_capitol'] = p_df['office']
 

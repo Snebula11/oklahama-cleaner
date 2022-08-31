@@ -71,7 +71,7 @@ def convert_ctcl(ctcl_df, state):
             new_df.loc[i, 'nickname'] = new_df.loc[i, 'name_middle']
             new_df.loc[i, 'name_middle'] = np.nan
 
-    new_df['Image'] = ctcl_df['Photo URL']
+    new_df['image'] = ctcl_df['Photo URL']
 
     for row in new_df.index:
         if ctcl_df['Jurisdiction'][row] == 'United States':
@@ -79,10 +79,10 @@ def convert_ctcl(ctcl_df, state):
             district = str(ctcl_df['Seat'][row])
 
             if ctcl_df['Role'][row] == 'legislatorLowerBody':
-                new_df.loc[row, 'Office'] = 'U.S. House ' + long_state + ' ' + district
+                new_df.loc[row, 'office'] = 'U.S. House ' + long_state + ' ' + district
                 new_df.loc[row, 'district'] = long_state + ' Congressional ' + district
             elif ctcl_df['Role'][row] == 'legislatorUpperBody':
-                new_df.loc[row, 'Office'] = 'U.S. Senate ' + long_state
+                new_df.loc[row, 'office'] = 'U.S. Senate ' + long_state
                 new_df.loc[row, 'district'] = long_state + ' Statewide'
 
         elif ctcl_df['Role'][row] != 'governmentOfficer':
@@ -90,16 +90,16 @@ def convert_ctcl(ctcl_df, state):
             district = str(ctcl_df['Seat'][row])
 
             if ctcl_df['Role'][row] == 'legislatorLowerBody':
-                new_df.loc[row, 'Office'] = long_state + ' State House ' + district
+                new_df.loc[row, 'office'] = long_state + ' State House ' + district
                 new_df.loc[row, 'district'] = long_state + ' State House ' + district
             elif ctcl_df['Role'][row] == 'legislatorUpperBody':
-                new_df.loc[row, 'Office'] = long_state + ' State Senate ' + district
+                new_df.loc[row, 'office'] = long_state + ' State Senate ' + district
                 new_df.loc[row, 'district'] = long_state + ' State Senate ' + district
 
         else:
             new_df.loc[row, 'district'] = long_state + ' Statewide'
             new_df.loc[row, 'title'] = ctcl_df['Office Name'][row].replace(state, long_state)
-            new_df.loc[row, 'Office'] = ctcl_df['Office Name'][row].replace(state, long_state)
+            new_df.loc[row, 'office'] = ctcl_df['Office Name'][row].replace(state, long_state)
 
     new_df['party'] = ctcl_df['Candidate Party Registration']
 
@@ -107,9 +107,9 @@ def convert_ctcl(ctcl_df, state):
 
     for row in new_df.index:
         if pd.isna(ctcl_df['Incumbent'][row]):
-            for field in dh.incumbents_only:
-                if pd.isna(new_df.loc[row, field]):
-                    new_df.loc[row, field] = 'n/a'
+            # for field in dh.incumbents_only:
+            #     if pd.isna(new_df.loc[row, field]):
+            #         new_df.loc[row, field] = 'n/a'
             new_df.loc[row, 'status'] = 'Challenger'
         else:
             new_df.loc[row, 'status'] = 'Incumbent'
