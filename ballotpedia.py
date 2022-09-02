@@ -137,6 +137,4 @@ def convert_ballotpedia(bp_df, state):
 
     new_df['district_ocd_id'] = bp_df['District OCDID']
 
-    print('boom')
-
     return new_df

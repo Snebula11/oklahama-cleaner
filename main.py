@@ -4,6 +4,7 @@ import openstates
 import propublica
 import unify
 import utilities as util
+import data_headers as dh
 import urllib.error
 
 converted_bp = converted_ctcl = converted_openstates = converted_propublica = None
@@ -18,18 +19,14 @@ def merge_data(state):
 
     # BP CONVERSION
     bp_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/ballotpedia_data.csv'
-    print('one')
     try:
-        bp_data = bp.pd.read_csv(bp_url)
-        print('two')
+        bp_data = bp.pd.read_csv(bp_url, dtype=dh.bp_dtypes)
     except urllib.error.HTTPError:
         print('\nNo BP data available.')
         pass
     else:
         bp_df = bp.pd.DataFrame(bp_data)
-        print('three')
         converted_bp = bp.convert_ballotpedia(bp_df, state)
-        print('four')
 
     # CTCL CONVERSION
     ctcl_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/' + state.upper() + '/' \
