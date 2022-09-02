@@ -26,6 +26,7 @@ def merge_data(state):
         pass
     else:
         bp_df = bp.pd.DataFrame(bp_data)
+
         converted_bp = bp.convert_ballotpedia(bp_df, state)
 
     # CTCL CONVERSION
