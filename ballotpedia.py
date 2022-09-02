@@ -7,6 +7,10 @@ def convert_ballotpedia(bp_df, state):
     # Stores full state name
     long_state = util.statenames(state.upper())
 
+    # Takes the rows for the requested states
+    bp_df = bp_df[bp_df['State'] == state]
+    bp_df = bp_df.reset_index()
+
     # Makes a new DataFrame to store output
     new_df = pd.DataFrame(columns=dh.new_column_headers)
 
@@ -127,40 +131,12 @@ def convert_ballotpedia(bp_df, state):
 
     new_df['gender'] = bp_df['Gender']
 
-    new_df['email_other'] = bp_df['Other email']
-    new_df['email_campaign'] = bp_df['Campaign email']
-
-    new_df['website_personal'] = bp_df['Personal website']
-    new_df['website_campaign'] = bp_df['Campaign website']
-
-    new_df['twitter_personal'] = bp_df['Personal Twitter']
-    for row in new_df.index:
-        if not pd.isna(new_df['twitter_personal'][row]):
-            new_df.loc[row, 'twitter_personal'] = 'https://www.twitter.com/' + str(new_df.loc[row, 'twitter_personal'])
-    new_df['twitter_campaign'] = bp_df['Campaign Twitter']
-    for row in new_df.index:
-        if not pd.isna(new_df['twitter_campaign'][row]):
-            new_df.loc[row, 'twitter_campaign'] = 'https://www.twitter.com/' + str(new_df.loc[row, 'twitter_campaign'])
-
-    new_df['youtube_personal'] = bp_df['Personal YouTube']
-    new_df['youtube_campaign'] = bp_df['Campaign YouTube']
-
-    new_df['instagram_personal'] = bp_df['Personal Instagram']
-    new_df['instagram_campaign'] = bp_df['Campaign Instagram']
-
-    new_df['facebook_personal'] = bp_df['Personal Facebook']
-    new_df['facebook_campaign'] = bp_df['Campaign Facebook']
-
-    new_df['linkedin'] = bp_df['LinkedIn']
-
-    new_df['address_campaign'] = bp_df['Campaign mailing address']
-
-    new_df['phone_campaign'] = bp_df['Campaign phone']
-
     new_df['ballotpedia_id'] = bp_df['Person ID']
     new_df['Ballotpedia URL'] = bp_df['Ballotpedia URL']
     new_df['ballotpedia Office ID'] = bp_df['Office ID']
 
     new_df['district_ocd_id'] = bp_df['District OCDID']
+
+    print('boom')
 
     return new_df

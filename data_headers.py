@@ -21,7 +21,7 @@ new_column_headers = ['name', 'name_first', 'name_middle', 'name_last', 'nicknam
                       'instagram_campaign', 'facebook_official', 'facebook_personal', 'facebook_campaign', 'linkedin',
                       'rumble', 'gab', 'rss', 'address_campaign', 'address_capitol', 'address_district',
                       'phone_campaign', 'phone_capitol', 'phone_district', 'fax_capitol', 'fax_district',
-                      'contact_form_url', 'date_assumed_office', 'appointed_by', 'appointed_data', 'confirmed_date',
+                      'contact_form_url', 'date_assumed_office', 'appointed_by', 'appointed_date', 'confirmed_date',
                       'term_end_date', 'congress_year', 'thomas ID', 'lis_id', 'cspan_id', 'govtrack_id',
                       'votesmart_id', 'ballotpedia_id', 'washington_post_id', 'icpsr_id', 'wikipedia_id',
                       'google_entity_id', 'Ballotpedia URL', 'propublica URL', 'ballotpedia Office ID', 'govpackpub_id',

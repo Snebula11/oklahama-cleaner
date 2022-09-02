@@ -17,17 +17,19 @@ def merge_data(state):
     output_filepath = 'data/' + state.upper() + '/' + state.lower() + '_output.csv'
 
     # BP CONVERSION
-    bp_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/' + state.upper() + '/' \
-             + state.lower() + '_bp_data.csv'
+    bp_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/ballotpedia_data.csv'
+    print('one')
     try:
         bp_data = bp.pd.read_csv(bp_url)
+        print('two')
     except urllib.error.HTTPError:
         print('\nNo BP data available.')
         pass
     else:
         bp_df = bp.pd.DataFrame(bp_data)
-
+        print('three')
         converted_bp = bp.convert_ballotpedia(bp_df, state)
+        print('four')
 
     # CTCL CONVERSION
     ctcl_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/' + state.upper() + '/' \
