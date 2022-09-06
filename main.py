@@ -50,6 +50,16 @@ def merge_data(state):
     # PROPUBLICA
     converted_propublica = propublica.convert_propublica(state)
 
+    # MA testing
+    util.pretty_print(converted_bp)
+    print('\n\n')
+    util.pretty_print(converted_ctcl)
+    print('\n\n')
+    util.pretty_print(converted_openstates)
+    print('\n\n')
+    util.pretty_print(converted_propublica)
+    print('\n\n')
+
     # OUTPUT MERGED DATASET
     # check if we have all 3
     if converted_bp is not None:
@@ -67,7 +77,6 @@ def merge_data(state):
                                       converted_openstates,
                                       third_df=converted_propublica)
         unified.to_csv(output_filepath, index=False, encoding='utf-8')
-        converted_bp = converted_ctcl = converted_openstates = converted_propublica = None
 
 
 if __name__ == '__main__':
