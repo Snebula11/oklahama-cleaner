@@ -19,9 +19,9 @@ def convert_ballotpedia(bp_df, state):
     for i in range(0, len(bp_df.index)):
         row_stage = bp_df['Stage'][i]
         row_race_type = bp_df['Race type'][i]
-        if row_stage == 'Primary' or row_stage == 'Primary Runoff':
-            rows_to_delete.append(i)
-        elif (row_race_type == 'Special' or row_race_type == 'Recall') and row_stage == 'General':
+        # if row_stage == 'Primary' or row_stage == 'Primary Runoff':
+        #     rows_to_delete.append(i)
+        if (row_race_type == 'Special' or row_race_type == 'Recall') and row_stage == 'General':
             rows_to_delete.append(i)
     bp_df.drop(labels=rows_to_delete, axis=0, inplace=True)
     bp_df.reset_index(inplace=True)

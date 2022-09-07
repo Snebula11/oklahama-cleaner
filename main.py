@@ -50,6 +50,8 @@ def merge_data(state):
     # PROPUBLICA
     converted_propublica = propublica.convert_propublica(state)
 
+    util.pretty_print(converted_bp)
+
     # OUTPUT MERGED DATASET
     # check if we have all 3
     if converted_bp is not None:
