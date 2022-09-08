@@ -21,7 +21,7 @@ states = {
     'KS': 'Kansas',
     'KY': 'Kentucky',
     'LA': 'Louisiana',
-    'MA': 'Massachusetts',
+    # 'MA': 'Massachusetts',
     'MD': 'Maryland',
     'ME': 'Maine',
     'MI': 'Michigan',
