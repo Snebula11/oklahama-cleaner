@@ -21,13 +21,11 @@ def merge_data(state):
     bp_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/data/ballotpedia_data.csv'
     try:
         bp_data = bp.pd.read_csv(bp_url, dtype=dh.bp_dtypes)
-        print('we can read in from web')
     except urllib.error.HTTPError:
         print('\nNo BP data available.')
         pass
     else:
         bp_df = bp.pd.DataFrame(bp_data)
-        print('about to convert bp')
         converted_bp = bp.convert_ballotpedia(bp_df, state)
 
     # CTCL CONVERSION
@@ -40,8 +38,6 @@ def merge_data(state):
         pass
     else:
         ctcl_df = bp.pd.DataFrame(ctcl_data)
-        ctcl_df.to_csv('data/TX/ctcl_original1.csv', index=False, encoding='utf-8')
-        print('about to convert CTCL')
         converted_ctcl = ctcl.convert_ctcl(ctcl_df, state)
 
     # OPENSTATES CONVERSION
@@ -63,7 +59,6 @@ def merge_data(state):
                                       third_df=converted_openstates,
                                       fourth_df=converted_propublica)
         unified.to_csv(output_filepath, index=False, encoding='utf-8')
-        converted_ctcl.to_csv('data/TX/texas_converted_ctcl.csv', index=False, encoding='utf-8')
         converted_bp = converted_ctcl = converted_openstates = converted_propublica = None
     # if we do not
     elif converted_bp is None:
