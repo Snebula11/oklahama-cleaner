@@ -73,7 +73,11 @@ def convert_ctcl(ctcl_df, state):
 
     new_df['image'] = ctcl_df['Photo URL']
 
+    # Office, district, title
     for row in new_df.index:
+        split_jurisdiction = str(ctcl_df['Jurisdiction'][row]).split()
+
+        # U.S. Congress
         if ctcl_df['Jurisdiction'][row] == 'United States':
             new_df.loc[row, 'title'] = ctcl_df['Office Category'][row]
             district = str(ctcl_df['Seat'][row])
@@ -84,6 +88,41 @@ def convert_ctcl(ctcl_df, state):
             elif ctcl_df['Role'][row] == 'legislatorUpperBody':
                 new_df.loc[row, 'office'] = 'U.S. Senate ' + long_state
                 new_df.loc[row, 'district'] = long_state + ' Statewide'
+
+        # County Official
+        elif len(split_jurisdiction) > 1 and split_jurisdiction[-1] == 'County':
+            if ctcl_df['Role'][row] == 'governmentOfficer':
+                split_office_category = str(ctcl_df['Office Category'][row]).split()
+                if split_office_category[0] == 'County':
+                    split_office_category = split_office_category[1:]
+
+                new_df.loc[row, 'office'] = '{0} {1}'.format(str(ctcl_df['Electoral District'][row]),
+                                                             ' '.join(split_office_category))
+                new_df.loc[row, 'district'] = ctcl_df['Electoral District'][row]
+                new_df.loc[row, 'title'] = ctcl_df['Office Category'][row]
+
+            elif ctcl_df['Role'][row] == 'headOfGovernment':
+                new_df.loc[row, 'office'] = ctcl_df['Office Name'][row]
+                new_df.loc[row, 'district'] = ctcl_df['Electoral District'][row]
+                new_df.loc[row, 'title'] = 'County Commissioners Court Judge'
+
+            elif ctcl_df['Role'][row] == 'legislatorUpperBody':
+                new_df.loc[row, 'office'] = '{0} {1}'.format(ctcl_df['Jurisdiction'][row], 'Commissioner')
+                new_df.loc[row, 'district'] = ctcl_df['Electoral District'][row]
+                new_df.loc[row, 'title'] = 'County Commissioner'
+
+        elif len(split_jurisdiction) > 1 and split_jurisdiction[-1] == 'city':
+            if ctcl_df['Role'][row] == 'legislatorUpperBody':
+                new_df.loc[row, 'office'] = new_df.loc[row, 'district'] = '{0} {1} {2}'.format(
+                    str(ctcl_df['Electoral District'][row]).replace(' city', ''),
+                    'City Council',
+                    ctcl_df['Seat'][row])
+                new_df.loc[row, 'title'] = 'City Councilperson'
+
+            elif ctcl_df['Role'][row] == 'headOfGovernment':
+                new_df.loc[row, 'office'] = ctcl_df['Office Name'][row]
+                new_df.loc[row, 'district'] = 'City of ' + str(ctcl_df['Electoral District'][row]).replace(' city', '')
+                new_df.loc[row, 'title'] = 'Mayor'
 
         elif ctcl_df['Role'][row] != 'governmentOfficer':
             new_df.loc[row, 'title'] = long_state + ' ' + ctcl_df['Office Category'][row]
