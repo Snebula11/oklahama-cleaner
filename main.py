@@ -1,3 +1,5 @@
+import pandas as pd
+
 import ballotpedia as bp
 import ctcl
 import openstates
@@ -60,13 +62,13 @@ def merge_data(state):
                                       fourth_df=converted_propublica)
         unified.to_csv(output_filepath, index=False, encoding='utf-8')
         converted_bp = converted_ctcl = converted_openstates = converted_propublica = None
-    # if we do not
-    elif converted_bp is None:
-        print(f'Unifying 3 datasets for {state}!')
-        unified = unify.unify_bp_ctcl(converted_ctcl,
-                                      converted_openstates,
-                                      third_df=converted_propublica)
-        unified.to_csv(output_filepath, index=False, encoding='utf-8')
+    # we shouldn't need below anymore, now that we have all BP data
+    # elif converted_bp is None:
+    #     print(f'Unifying 3 datasets for {state}!')
+    #     unified = unify.unify_bp_ctcl(converted_ctcl,
+    #                                   converted_openstates,
+    #                                   third_df=converted_propublica)
+    #     unified.to_csv(output_filepath, index=False, encoding='utf-8')
 
 
 if __name__ == '__main__':
